@@ -45,7 +45,7 @@ export default function Navbar() {
         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
         className="fixed top-0 left-0 right-0 z-50 bg-cream/70 backdrop-blur-md border-b border-ink/5"
       >
-        <div className="max-w-content mx-auto px-6 md:px-8 py-4 flex items-center justify-between">
+        <div className="max-w-content mx-auto px-5 md:px-6 py-4 flex items-center justify-between">
           {/* Left: Avatar + Name */}
           <Link
             href="/"
@@ -65,7 +65,7 @@ export default function Navbar() {
           </Link>
 
           {/* Center: Floating Menu (Pill) */}
-          <nav className="hidden md:flex items-center bg-[#EDE6D8]/60 border border-ink/10 rounded-full p-1 shadow-sm">
+          <nav className="hidden md:flex items-center bg-[#F0EDE8]/60 border border-ink/10 rounded-full p-1 shadow-sm">
             {links.map((l) => {
               const active = pathname === l.href || (l.href !== "/" && pathname.startsWith(l.href));
               return (
@@ -100,7 +100,7 @@ export default function Navbar() {
           <button
             data-cursor-hover
             onClick={() => setMenuOpen(true)}
-            className="md:hidden flex flex-col gap-1.5 p-2 bg-[#EDE6D8]/60 border border-ink/10 rounded-full w-10 h-10 items-center justify-center"
+            className="md:hidden flex flex-col gap-1.5 p-2 bg-[#F0EDE8]/60 border border-ink/10 rounded-full w-10 h-10 items-center justify-center"
             aria-label="Open menu"
           >
             <span className="w-5 h-px bg-ink" />
@@ -134,7 +134,7 @@ export default function Navbar() {
                 data-cursor-hover
                 onClick={() => setMenuOpen(false)}
                 aria-label="Close menu"
-                className="w-10 h-10 bg-[#EDE6D8]/60 border border-ink/10 rounded-full flex items-center justify-center text-xl leading-none"
+                className="w-10 h-10 bg-[#F0EDE8]/60 border border-ink/10 rounded-full flex items-center justify-center text-xl leading-none"
               >
                 ×
               </button>

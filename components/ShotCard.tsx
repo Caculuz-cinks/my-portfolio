@@ -21,7 +21,7 @@ export default function ShotCard({ shot }: { shot: Shot }) {
       className="break-inside-avoid mb-6 group cursor-pointer"
     >
       <div
-        className={`relative w-full ${heightMap[shot.aspect]} rounded-2xl bg-[#EDE6D8] border border-ink/10 overflow-hidden flex items-center justify-center px-4 text-center`}
+        className={`relative w-full ${heightMap[shot.aspect]} rounded-2xl bg-[#F0EDE8] border border-ink/10 overflow-hidden flex items-center justify-center px-4 text-center`}
       >
         <span className="text-muted text-sm">{shot.alt}</span>
         <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/50 transition-colors duration-300 flex items-center justify-center">

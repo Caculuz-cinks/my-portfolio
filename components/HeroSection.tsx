@@ -47,7 +47,7 @@ export default function HeroSection() {
 
   return (
     <section className="pt-32 md:pt-40 pb-16 md:pb-24 overflow-hidden">
-      <div className="max-w-content mx-auto px-6 md:px-8">
+      <div className="max-w-content mx-auto px-5 md:px-6">
         {/* Top Header */}
         <div className="max-w-4xl">
           <motion.div
@@ -143,7 +143,7 @@ export default function HeroSection() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.8, duration: 0.8 }}
-        className="mt-20 md:mt-28 border-t border-b border-ink/5 py-8 bg-[#EDE6D8]/20"
+        className="mt-20 md:mt-28 border-t border-b border-ink/5 py-8 bg-[#F0EDE8]/20"
       >
         <p className="text-center text-xs uppercase tracking-widest text-muted mb-6 font-semibold">
           Companies and organizations I&apos;ve collaborated with

@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --background: #F5F0E8;
-  --foreground: #1A1A1A;
+  --background: #FDFCFB;
+  --foreground: #3E3D3E;
 }
 
 * {
@@ -19,6 +19,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* Comfortable reading size — slight bump from default 16px */
+  font-size: 17px;
 }
 
 body {
@@ -28,8 +30,8 @@ body {
 }
 
 ::selection {
-  background: #1A1A1A;
-  color: #F5F0E8;
+  background: #3E3D3E;
+  color: #FDFCFB;
 }
 
 .no-scrollbar::-webkit-scrollbar {

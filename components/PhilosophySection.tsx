@@ -5,8 +5,8 @@ import Reveal from "./Reveal";
 
 export default function PhilosophySection() {
   return (
-    <section className="py-20 md:py-28 bg-[#EDE6D8]/20 border-b border-ink/5">
-      <div className="max-w-content mx-auto px-6 md:px-8">
+    <section className="py-20 md:py-28 bg-[#F0EDE8]/20 border-b border-ink/5">
+      <div className="max-w-content mx-auto px-5 md:px-6">
         <Reveal>
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-[1.1] text-[#0B3C2A] mb-12 max-w-4xl tracking-tight">
             Design is how I think. <br />

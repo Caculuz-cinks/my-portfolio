@@ -11,7 +11,7 @@ export default function UIShowcase() {
 
   return (
     <section className="py-20 md:py-28">
-      <div className="max-w-content mx-auto px-6 md:px-8">
+      <div className="max-w-content mx-auto px-5 md:px-6">
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -30,7 +30,7 @@ export default function UIShowcase() {
         className="overflow-x-auto no-scrollbar"
       >
         <div
-          className="flex gap-6 px-6 md:px-8"
+          className="flex gap-6 px-5 md:px-6"
           style={{
             animation: paused ? "none" : "shots-scroll 32s linear infinite",
           }}
@@ -39,7 +39,7 @@ export default function UIShowcase() {
             <div
               key={i}
               data-cursor-hover
-              className="shrink-0 w-[220px] md:w-[260px] aspect-[9/16] rounded-2xl bg-[#EDE6D8] border border-ink/10 shadow-sm flex items-center justify-center text-center px-4"
+              className="shrink-0 w-[220px] md:w-[260px] aspect-[9/16] rounded-2xl bg-[#F0EDE8] border border-ink/10 shadow-sm flex items-center justify-center text-center px-4"
             >
               <span className="text-muted text-sm">{shot.label}</span>
             </div>
@@ -58,7 +58,7 @@ export default function UIShowcase() {
         }
       `}</style>
 
-      <div className="max-w-content mx-auto px-6 md:px-8 mt-8">
+      <div className="max-w-content mx-auto px-5 md:px-6 mt-8">
         <Link
           href="/shots"
           data-cursor-hover

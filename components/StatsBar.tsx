@@ -15,7 +15,7 @@ export default function StatsBar() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.6 }}
-        className="max-w-content mx-auto px-6 md:px-8 py-20 md:py-28 flex flex-col sm:flex-row items-center justify-center gap-14 sm:gap-24 text-center"
+        className="max-w-content mx-auto px-5 md:px-6 py-20 md:py-28 flex flex-col sm:flex-row items-center justify-center gap-14 sm:gap-24 text-center"
       >
         {stats.map((s) => (
           <div key={s.label}>

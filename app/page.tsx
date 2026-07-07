@@ -17,7 +17,7 @@ export default function Home() {
 
       {/* Timeline Projects Section */}
       <section className="py-20 md:py-28 bg-[#F5F0E8] overflow-hidden">
-        <div className="max-w-content mx-auto px-6 md:px-8">
+        <div className="max-w-content mx-auto px-5 md:px-6">
           <Reveal>
             <div className="mb-16 md:mb-24">
               <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-[#0B3C2A] tracking-tight">
@@ -53,8 +53,8 @@ export default function Home() {
       <OtherWorksSection />
 
       {/* Testimonials Section */}
-      <section className="py-20 md:py-28 bg-[#EDE6D8]/20 border-t border-ink/5">
-        <div className="max-w-content mx-auto px-6 md:px-8">
+      <section className="py-20 md:py-28 bg-[#F0EDE8]/20 border-t border-ink/5">
+        <div className="max-w-content mx-auto px-5 md:px-6">
           <Reveal>
             <div className="mb-14">
               <h2 className="font-serif text-2xl md:text-3xl text-[#0B3C2A] tracking-tight">

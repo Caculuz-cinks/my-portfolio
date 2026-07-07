@@ -22,7 +22,7 @@ export default function ProjectDetailPage({
 
   return (
     <article className="pt-40 md:pt-52 pb-24 md:pb-32">
-      <div className="max-w-content mx-auto px-6 md:px-8">
+      <div className="max-w-content mx-auto px-5 md:px-6">
         <Reveal>
           <p className="text-xs uppercase tracking-widest text-muted mb-4">
             {project.year} · {project.tags.join(" · ")}
@@ -64,7 +64,7 @@ export default function ProjectDetailPage({
 
         {/* Hero mockup */}
         <Reveal delay={0.15}>
-          <div className="mt-12 w-full aspect-[16/9] rounded-2xl bg-[#EDE6D8] border border-ink/10 flex items-center justify-center text-muted">
+          <div className="mt-12 w-full aspect-[16/9] rounded-2xl bg-[#F0EDE8] border border-ink/10 flex items-center justify-center text-muted">
             {project.title.split(" ").slice(0, 4).join(" ")} — overview screen
           </div>
         </Reveal>

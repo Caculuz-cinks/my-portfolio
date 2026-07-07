@@ -32,7 +32,7 @@ export default function BrowserMockup({ slug, title }: { slug: string; title: st
             <div className="flex-1 flex flex-col gap-2 overflow-y-auto">
               <div className="flex items-center justify-between border-b border-ink/5 pb-1">
                 <span className="font-semibold text-[#0B3C2A]">SOAP Note Draft</span>
-                <span className="bg-[#EDE6D8] px-1.5 py-0.5 rounded text-[8px] text-muted">Review Required</span>
+                <span className="bg-[#F0EDE8] px-1.5 py-0.5 rounded text-[8px] text-muted">Review Required</span>
               </div>
               <div className="flex flex-col gap-2">
                 <div>
@@ -57,7 +57,7 @@ export default function BrowserMockup({ slug, title }: { slug: string; title: st
           <div className="flex-1 flex gap-3 p-3 overflow-hidden text-[10px] bg-white rounded-lg">
             {/* Left: Patient record */}
             <div className="w-1/2 border-r border-ink/5 pr-3 flex flex-col gap-2">
-              <div className="bg-[#EDE6D8]/50 p-2 rounded">
+              <div className="bg-[#F0EDE8]/50 p-2 rounded">
                 <span className="text-muted block text-[8px]">PATIENT RECORD</span>
                 <span className="font-bold block mt-0.5">Amara K. (Age 28)</span>
                 <span className="text-ink/60">Vitals: BP 110/70, Temp 38.5°C</span>
@@ -148,7 +148,7 @@ export default function BrowserMockup({ slug, title }: { slug: string; title: st
               </div>
             </div>
             {/* Bottom notification */}
-            <div className="bg-[#EDE6D8]/50 p-2 rounded border border-ink/5 text-[8px] leading-normal text-muted flex items-center justify-between">
+            <div className="bg-[#F0EDE8]/50 p-2 rounded border border-ink/5 text-[8px] leading-normal text-muted flex items-center justify-between">
               <span>Time Elapsed: 16m 42s</span>
               <span className="font-bold text-ink">Estimated completion: 4m</span>
             </div>
@@ -157,7 +157,7 @@ export default function BrowserMockup({ slug, title }: { slug: string; title: st
 
       default:
         return (
-          <div className="flex-1 bg-[#EDE6D8] border border-ink/5 rounded-lg flex items-center justify-center text-muted text-xs">
+          <div className="flex-1 bg-[#F0EDE8] border border-ink/5 rounded-lg flex items-center justify-center text-muted text-xs">
             {title} Showcase
           </div>
         );
@@ -165,7 +165,7 @@ export default function BrowserMockup({ slug, title }: { slug: string; title: st
   };
 
   return (
-    <div className="w-full aspect-[4/3] rounded-2xl bg-[#EDE6D8]/50 border border-ink/10 p-3 flex flex-col gap-2.5 shadow-sm transition-all duration-300 hover:shadow-md select-none group-hover:border-[#0B3C2A]/30">
+    <div className="w-full aspect-[4/3] rounded-2xl bg-[#F0EDE8]/50 border border-ink/10 p-3 flex flex-col gap-2.5 shadow-sm transition-all duration-300 hover:shadow-md select-none group-hover:border-[#0B3C2A]/30">
       {/* Browser chrome headers */}
       <div className="flex items-center justify-between px-1">
         {/* Window dots */}

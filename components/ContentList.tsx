@@ -50,7 +50,7 @@ export default function ContentList() {
             className="py-8 flex flex-col md:flex-row md:items-start gap-6"
           >
             {item.hasPhoto && (
-              <div className="shrink-0 w-full md:w-40 aspect-[4/3] rounded-xl bg-[#EDE6D8] border border-ink/10 flex items-center justify-center text-xs text-muted text-center px-2">
+              <div className="shrink-0 w-full md:w-40 aspect-[4/3] rounded-xl bg-[#F0EDE8] border border-ink/10 flex items-center justify-center text-xs text-muted text-center px-2">
                 Photo
               </div>
             )}

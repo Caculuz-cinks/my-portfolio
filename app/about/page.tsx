@@ -31,7 +31,7 @@ const skills = [
 export default function AboutPage() {
   return (
     <section className="pt-40 md:pt-52 pb-24 md:pb-32">
-      <div className="max-w-content mx-auto px-6 md:px-8">
+      <div className="max-w-content mx-auto px-5 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
           <Reveal className="md:col-span-2 order-2 md:order-1">
             <h1 className="font-serif text-4xl md:text-5xl leading-tight mb-8">
@@ -57,7 +57,7 @@ export default function AboutPage() {
 
           <div className="order-1 md:order-2">
             <Reveal delay={0.1}>
-              <div className="w-full aspect-[4/5] rounded-2xl bg-[#EDE6D8] border border-ink/10 flex items-center justify-center text-muted text-sm">
+              <div className="w-full aspect-[4/5] rounded-2xl bg-[#F0EDE8] border border-ink/10 flex items-center justify-center text-muted text-sm">
                 Photo of Isaiah Adeleke
               </div>
             </Reveal>
