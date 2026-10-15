@@ -65,6 +65,16 @@ const roobert = localFont({
   display: "swap",
 });
 
+const recoleta = localFont({
+  src: [
+    { path: "../public/fonts/Recoleta/Recoleta-Regular.woff2", weight: "400", style: "normal" },
+    { path: "../public/fonts/Recoleta/Recoleta-SemiBold.woff2", weight: "600", style: "normal" },
+    { path: "../public/fonts/Recoleta/Recoleta-Bold.woff2", weight: "700", style: "normal" },
+  ],
+  variable: "--font-display",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Isaiah Adeleke — Senior AI Product Designer",
   description:
@@ -79,7 +89,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${acorn.variable} ${roobert.variable} font-sans bg-cream text-ink antialiased`}
+        className={`${acorn.variable} ${roobert.variable} ${recoleta.variable} font-sans bg-cream text-ink antialiased`}
       >
         <CustomCursor />
         <Navbar />

@@ -2,166 +2,82 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 
 const links = [
   { href: "/projects", label: "Projects" },
-  { href: "/shots", label: "Shots" },
+  { href: "/shots", label: "UI Shots" },
   { href: "/about", label: "About" },
   { href: "/content", label: "Content" },
 ];
 
 export default function Navbar() {
-  const [hidden, setHidden] = useState(false);
-  const [lastY, setLastY] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
-  const { scrollY } = useScroll();
   const pathname = usePathname();
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    if (latest < 80) {
-      setHidden(false);
-    } else if (latest > lastY) {
-      setHidden(true);
-    } else {
-      setHidden(false);
-    }
-    setLastY(latest);
-  });
-
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [pathname]);
-
+  useEffect(() => setMenuOpen(false), [pathname]);
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
+
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
     <>
-      <motion.header
-        animate={{ y: hidden ? -100 : 0 }}
-        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-        className="fixed top-0 left-0 right-0 z-50 bg-cream/70 backdrop-blur-md border-b border-ink/5"
-      >
-        <div className="max-w-content mx-auto px-5 md:px-6 py-4 flex items-center justify-between">
-          {/* Left: Avatar + Name */}
-          <Link
-            href="/"
-            data-cursor-hover
-            className="flex items-center gap-3 group"
-          >
-            <div className="relative w-8 h-8 rounded-full overflow-hidden border border-ink/10 bg-creamdark flex-shrink-0">
-              <img
-                src="/profile.jpg"
-                alt="Isaiah Adeleke"
-                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-              />
-            </div>
-            <span className="font-serif text-lg tracking-tight font-semibold text-[#0B3C2A] group-hover:text-ink transition-colors duration-300">
-              Isaiah Adeleke
+      <header className="fixed inset-x-0 top-0 z-50 pointer-events-none">
+        <div className="max-w-content mx-auto px-7 md:px-14 lg:px-20 pt-5 md:pt-7 grid grid-cols-2 md:grid-cols-3 items-center">
+          <Link href="/" className="pointer-events-auto flex items-center gap-2.5 w-fit group rounded-full border border-[#241D35]/10 bg-white/90 p-1.5 pr-4 shadow-[0_8px_24px_rgba(36,29,53,.09)] backdrop-blur-xl">
+            <span className="w-8 h-8 rounded-full overflow-hidden border border-white shadow-sm bg-creamdark">
+              <img src="/photos/isaiah-headshot.png" alt="Isaiah Adeleke" className="w-full h-full object-cover" />
             </span>
+            <span className="hidden sm:block font-sans text-sm font-bold tracking-[-0.03em] text-[#241D35]">Isaiah Adeleke</span>
           </Link>
 
-          {/* Center: Floating Menu (Pill) */}
-          <nav className="hidden md:flex items-center bg-[#F0EDE8]/60 border border-ink/10 rounded-full p-1 shadow-sm">
-            {links.map((l) => {
-              const active = pathname === l.href || (l.href !== "/" && pathname.startsWith(l.href));
-              return (
-                <Link
-                  key={l.href}
-                  href={l.href}
-                  data-cursor-hover
-                  className={`text-xs font-semibold px-4 py-2 rounded-full transition-all duration-300 ${
-                    active
-                      ? "bg-[#0B3C2A] text-cream shadow-sm"
-                      : "text-ink/80 hover:text-ink hover:bg-ink/5"
-                  }`}
-                >
-                  {l.label}
-                </Link>
-              );
-            })}
+          <nav className="pointer-events-auto hidden md:flex justify-self-center items-center rounded-full bg-white/90 backdrop-blur-xl p-1.5 border border-white shadow-[0_12px_36px_rgba(36,39,37,0.12)]">
+            {links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                data-cursor-hover
+                className={`relative whitespace-nowrap rounded-full px-5 py-2 text-xs font-semibold transition-colors ${isActive(link.href) ? "text-white" : "text-ink/65 hover:text-ink"}`}
+              >
+                {isActive(link.href) && (
+                  <motion.span layoutId="active-nav" className="absolute inset-0 rounded-full bg-[#7C56F6]" transition={{ type: "spring", stiffness: 420, damping: 34 }} />
+                )}
+                <span className="relative z-10">{link.label}</span>
+              </Link>
+            ))}
           </nav>
 
-          {/* Right: CTA Button */}
-          <div className="hidden md:flex items-center">
-            <a
-              href="mailto:isaiahadeleke01@gmail.com"
-              data-cursor-hover
-              className="bg-[#0B3C2A] text-cream text-xs font-semibold px-5 py-2.5 rounded-full hover:bg-ink hover:text-cream shadow-sm transition-all duration-300"
-            >
+          <div className="justify-self-end flex items-center gap-2 pointer-events-auto">
+            <a href="mailto:isaiahadeleke01@gmail.com" className="hidden md:inline-flex items-center gap-2 rounded-full border border-white/60 bg-[#4930A8] text-white text-xs font-semibold px-5 py-2.5 shadow-[0_8px_24px_rgba(73,48,168,.2)] hover:-translate-y-0.5 transition-transform">
               Let&apos;s talk
             </a>
+            <button onClick={() => setMenuOpen(true)} aria-label="Open menu" className="md:hidden w-11 h-11 rounded-full bg-white shadow-md flex items-center justify-center">
+              <span className="text-xl">☰</span>
+            </button>
           </div>
-
-          {/* Mobile hamburger button */}
-          <button
-            data-cursor-hover
-            onClick={() => setMenuOpen(true)}
-            className="md:hidden flex flex-col gap-1.5 p-2 bg-[#F0EDE8]/60 border border-ink/10 rounded-full w-10 h-10 items-center justify-center"
-            aria-label="Open menu"
-          >
-            <span className="w-5 h-px bg-ink" />
-            <span className="w-5 h-px bg-ink" />
-          </button>
         </div>
-      </motion.header>
+      </header>
 
       <AnimatePresence>
         {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[60] bg-cream flex flex-col"
-          >
-            <div className="max-w-content mx-auto w-full px-6 py-4 flex items-center justify-between border-b border-ink/5">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full overflow-hidden border border-ink/10 bg-creamdark">
-                  <img
-                    src="/profile.jpg"
-                    alt="Isaiah Adeleke"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <span className="font-serif text-lg tracking-tight font-semibold text-[#0B3C2A]">
-                  Isaiah Adeleke
-                </span>
-              </div>
-              <button
-                data-cursor-hover
-                onClick={() => setMenuOpen(false)}
-                aria-label="Close menu"
-                className="w-10 h-10 bg-[#F0EDE8]/60 border border-ink/10 rounded-full flex items-center justify-center text-xl leading-none"
-              >
-                ×
-              </button>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[60] bg-[#F3EFE7] px-6 py-6 flex flex-col">
+            <div className="flex justify-between items-center">
+              <span className="font-bold">Isaiah Adeleke</span>
+              <button onClick={() => setMenuOpen(false)} aria-label="Close menu" className="w-11 h-11 rounded-full bg-white text-xl shadow-sm">×</button>
             </div>
-            <div className="flex-1 flex flex-col items-start justify-center gap-6 px-8 max-w-content mx-auto w-full">
-              {links.map((l, i) => (
-                <motion.div
-                  key={l.href}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.08 * i }}
-                >
-                  <Link
-                    href={l.href}
-                    className="font-serif text-5xl text-[#0B3C2A] hover:text-ink transition-colors"
-                  >
-                    {l.label}
-                  </Link>
+            <nav className="flex-1 flex flex-col justify-center gap-3">
+              {links.map((link, index) => (
+                <motion.div key={link.href} initial={{ opacity: 0, x: -24 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.07 }}>
+                  <Link href={link.href} className="display-heading text-[clamp(2.6rem,11vw,4.5rem)] text-[#4930A8]">{link.label}</Link>
                 </motion.div>
               ))}
-              <a
-                href="mailto:isaiahadeleke01@gmail.com"
-                className="mt-6 bg-[#0B3C2A] text-cream text-sm px-6 py-3 rounded-full hover:bg-ink transition-colors"
-              >
-                Let&apos;s talk
-              </a>
-            </div>
+            </nav>
+            <a href="mailto:isaiahadeleke01@gmail.com" className="rounded-2xl bg-[#4930A8] text-white py-4 text-center font-semibold">Let&apos;s talk</a>
           </motion.div>
         )}
       </AnimatePresence>

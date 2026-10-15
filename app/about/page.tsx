@@ -1,82 +1,61 @@
 import Reveal from "@/components/Reveal";
+import RichText from "@/components/RichText";
+import ExperienceList from "@/components/ExperienceList";
+import { profile } from "@/data/profile";
 
-export const metadata = {
-  title: "About — Isaiah Adeleke",
-};
-
-const bioParagraphs = [
-  "I'm Isaiah Adeleke — a Senior AI Product Designer and Co-founder building at the intersection of design, product strategy, and artificial intelligence.",
-  "I grew up curious about how things work, studied Computer Engineering with a specialisation in AI and Human-Computer Interaction, and eventually found my way to product design — the place where technical systems meet human experience. That combination is where I do my best work.",
-  "Most of my career has been spent building products in environments where the stakes are real. At Helium Health (YC S17), I shipped AI-powered clinical tools used by doctors across Nigeria — products that recovered thousands of hours of documentation time and brought specialist-level support into rural clinics that had never had access to it. At Tride, the company I co-founded, I'm building financial infrastructure for non-profits in Africa.",
-  "I care deeply about how AI and humans work together. Not AI as a novelty, but AI as a genuine collaborator — one that makes people more capable without removing them from the decisions that matter. That question shapes everything I design.",
-  "When I'm not designing, I'm teaching. I've run AI education classes for mixed audiences because I believe no one should be left behind in this shift. I'm based in Lagos, and looking for remote roles at global companies building things that matter.",
-];
-
-const credentials = [
-  { title: "Computer Engineering", subtitle: "AI & HCI specialisation" },
-  { title: "Helium Health (YC S17)", subtitle: "Senior AI Product Designer" },
-  { title: "Tride", subtitle: "Co-founder & CEO" },
-];
-
-const skills = [
-  "Product Design",
-  "AI Product Strategy",
-  "Human-AI Interaction",
-  "Systems Thinking",
-  "Conversation Design",
-  "Prototyping",
-  "Design Systems",
-];
+export const metadata = { title: "About — Isaiah Adeleke" };
 
 export default function AboutPage() {
   return (
-    <section className="pt-40 md:pt-52 pb-24 md:pb-32">
-      <div className="max-w-content mx-auto px-5 md:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
-          <Reveal className="md:col-span-2 order-2 md:order-1">
-            <h1 className="font-serif text-4xl md:text-5xl leading-tight mb-8">
-              Design is how I think. Building is how I prove it.
-            </h1>
-            <div className="space-y-5 text-ink/80 leading-relaxed max-w-xl">
-              {bioParagraphs.map((p, i) => (
-                <p key={i}>{p}</p>
-              ))}
-            </div>
+    <section className="pt-36 md:pt-48 pb-24 md:pb-32">
+      <div className="max-w-content mx-auto px-7 md:px-14 lg:px-20">
+        <Reveal>
+          <h1 className="display-heading gradient-ink text-[clamp(3rem,6vw,5.5rem)] max-w-5xl">{profile.aboutTitle}</h1>
+        </Reveal>
 
-            <div className="mt-10 flex flex-wrap gap-3">
-              {skills.map((s) => (
-                <span
-                  key={s}
-                  className="text-xs uppercase tracking-wide border border-ink/20 rounded-full px-4 py-2"
-                >
-                  {s}
-                </span>
-              ))}
+        <div className="mt-14 md:mt-20 page-card p-6 md:p-10 lg:p-12 grid grid-cols-1 items-start lg:grid-cols-[.65fr_1.35fr] gap-10 lg:gap-14">
+          <div className="lg:sticky lg:top-28"><Reveal>
+            <div className="aspect-[4/5] max-w-sm mx-auto rounded-[1.8rem] overflow-hidden bg-[#E6E0F4] shadow-lg">
+              <img src="/photos/isaiah-about.jpg" alt="Isaiah Adeleke smiling" className="w-full h-full object-cover" />
             </div>
-          </Reveal>
-
-          <div className="order-1 md:order-2">
-            <Reveal delay={0.1}>
-              <div className="w-full aspect-[4/5] rounded-2xl bg-[#F0EDE8] border border-ink/10 flex items-center justify-center text-muted text-sm">
-                Photo of Isaiah Adeleke
+          </Reveal></div>
+          <div className="py-2">
+            <Reveal delay={0.06}>
+              <div className="space-y-6 text-base md:text-lg leading-[1.8] text-ink/75">
+                {profile.aboutParagraphs.map((paragraph) => <p key={paragraph}><RichText text={paragraph} /></p>)}
               </div>
             </Reveal>
-
-            <Reveal delay={0.2}>
-              <div className="mt-8 bg-white rounded-2xl p-6">
-                <h2 className="font-serif text-lg mb-4">Credentials</h2>
-                <div className="space-y-4">
-                  {credentials.map((c) => (
-                    <div key={c.title}>
-                      <p className="text-sm font-medium">{c.title}</p>
-                      <p className="text-sm text-muted">{c.subtitle}</p>
-                    </div>
-                  ))}
-                </div>
+            <Reveal delay={0.12}>
+              <div className="mt-9 flex flex-wrap gap-3 border-t border-ink/10 pt-8">
+                <a href={profile.talkUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 rounded-xl bg-[#241D35] px-6 py-4 text-sm font-bold text-white hover:bg-[#4930A8] transition-colors">Let&apos;s talk <span aria-hidden="true">↗</span></a>
+                <a href={profile.resumeUrl} className="inline-flex items-center gap-3 rounded-xl border border-[#7C56F6]/25 bg-white px-6 py-4 text-sm font-bold text-[#4930A8] hover:bg-[#F1EDFF] transition-colors">Download résumé <span aria-hidden="true">↓</span></a>
               </div>
             </Reveal>
           </div>
         </div>
+
+        <section className="mt-24 md:mt-36">
+          <Reveal>
+            <h2 className="display-heading text-4xl md:text-6xl text-[#2D2350]">Experience, year by year.</h2>
+            <p className="mt-5 text-ink/60">Select a role to explore the work behind it.</p>
+          </Reveal>
+
+          <ExperienceList />
+        </section>
+
+        <section className="mt-24 md:mt-36 page-card p-7 md:p-12">
+          <Reveal>
+            <h2 className="display-heading text-3xl md:text-4xl text-[#2D2350]">Skills</h2>
+            <div className="mt-7 flex flex-wrap gap-3">
+              {profile.skills.map((skill) => <span key={skill} className="rounded-full border border-ink/12 bg-white/70 px-5 py-3 text-sm font-semibold text-[#2D2350]">{skill}</span>)}
+            </div>
+            <div className="mt-10 border-t border-ink/10 pt-8">
+              <h2 className="display-heading text-3xl md:text-4xl text-[#2D2350]">Education</h2>
+              <h3 className="mt-7 font-bold text-xl text-[#2D2350]">{profile.education.title}</h3>
+              <p className="mt-2 text-sm text-muted">{profile.education.subtitle}</p>
+            </div>
+          </Reveal>
+        </section>
       </div>
     </section>
   );

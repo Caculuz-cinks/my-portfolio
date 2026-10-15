@@ -6,11 +6,11 @@ import Reveal from "./Reveal";
 export default function PhilosophySection() {
   return (
     <section className="py-20 md:py-28 bg-[#F0EDE8]/20 border-b border-ink/5">
-      <div className="max-w-content mx-auto px-5 md:px-6">
+      <div className="max-w-content mx-auto px-7 md:px-14 lg:px-20">
         <Reveal>
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-[1.1] text-[#0B3C2A] mb-12 max-w-4xl tracking-tight">
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-[1.1] text-[#4930A8] mb-12 max-w-4xl tracking-tight">
             Design is how I think. <br />
-            <span className="text-[#0B3C2A]/60">Building is how I prove it.</span>
+            <span className="text-[#4930A8]/60">Building is how I prove it.</span>
           </h2>
         </Reveal>
 
@@ -50,7 +50,7 @@ export default function PhilosophySection() {
                 <a
                   href="/about"
                   data-cursor-hover
-                  className="inline-flex bg-[#0B3C2A] text-cream text-xs font-semibold px-6 py-3 rounded-full hover:bg-ink hover:text-cream shadow-sm transition-all duration-300"
+                  className="inline-flex bg-[#4930A8] text-cream text-xs font-semibold px-6 py-3 rounded-full hover:bg-ink hover:text-cream shadow-sm transition-all duration-300"
                 >
                   Read my story →
                 </a>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="800" viewBox="0 0 1400 800">
+  <rect width="1400" height="800" fill="#F1EDFF"/>
+  <g font-family="Arial, sans-serif">
+    <text x="90" y="110" font-size="22" font-weight="700" letter-spacing="4" fill="#7C56F6">ENERGYSTACK · FINANCING CHECKOUTS</text>
+    <text x="85" y="285" font-size="140" font-weight="700" letter-spacing="-6" fill="#2D2350">47% → 89%</text>
+    <text x="94" y="360" font-size="31" fill="#6A5D80">Changing when customers discover affordability.</text>
+    <text x="94" y="463" font-size="22" fill="#6A5D80">BEFORE</text>
+    <rect x="90" y="490" width="1220" height="65" rx="14" fill="#D6CCE8"/>
+    <path d="M104 490h559v65H104a14 14 0 0 1-14-14v-37a14 14 0 0 1 14-14Z" fill="#7C56F6"/>
+    <text x="94" y="625" font-size="22" fill="#6A5D80">AFTER</text>
+    <rect x="90" y="650" width="1220" height="65" rx="14" fill="#D6CCE8"/>
+    <path d="M104 650h1072v65H104a14 14 0 0 1-14-14v-37a14 14 0 0 1 14-14Z" fill="#7C56F6"/>
+  </g>
+</svg>

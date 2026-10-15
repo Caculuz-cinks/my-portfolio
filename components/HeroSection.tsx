@@ -1,155 +1,150 @@
 "use client";
 
-import { motion } from "framer-motion";
-import Ticker from "./Ticker";
+import Link from "next/link";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
+
+const cards = [
+  {
+    title: "Recent work",
+    text: "How I turn complex product problems into clear, shipped experiences.",
+    href: "/projects",
+    action: "View case studies",
+    color: "#F5D7A1",
+    rotate: -3.5,
+  },
+  {
+    title: "About me",
+    text: "Product designer, builder, teacher—and someone who believes good work should move the business.",
+    href: "/about",
+    action: "A bit about me",
+    color: "#E5DFFC",
+    rotate: 2.5,
+  },
+  {
+    title: "I share my thoughts",
+    text: "Notes, talks, and classes on AI, product design, and making technology useful.",
+    href: "/content",
+    action: "Read & watch",
+    color: "#D7E8F6",
+    rotate: -1.5,
+  },
+];
 
 export default function HeroSection() {
-  const cardsData = [
-    {
-      id: 1,
-      type: "note",
-      title: "Co-founder @ Tride",
-      text: "Building fintech solutions for African organizations, compressing bank onboarding from weeks to minutes.",
-      bgColor: "bg-[#F9D371] text-[#1A1A1A]",
-      rotation: "rotate-[-3deg] hover:rotate-[0deg]",
-      zIndex: "hover:z-10",
-    },
-    {
-      id: 2,
-      type: "photo",
-      src: "/profile.jpg",
-      caption: "Yes, this is me! 👋",
-      bgColor: "bg-white text-[#1A1A1A] p-3 shadow-md",
-      rotation: "rotate-[2deg] hover:rotate-[0deg]",
-      zIndex: "hover:z-10",
-    },
-    {
-      id: 3,
-      type: "note",
-      title: "AI & Human-AI",
-      text: "Designing intelligent systems. I focus on ambient documentation, specialist copilots, and thinking partners.",
-      bgColor: "bg-[#A7D0CD] text-[#1A1A1A]",
-      rotation: "rotate-[-1.5deg] hover:rotate-[0deg]",
-      zIndex: "hover:z-10",
-    },
-    {
-      id: 4,
-      type: "cta",
-      title: "Work with me",
-      text: "Currently based in Lagos, Nigeria. Available for selected design consulting & advising.",
-      actionText: "Let's chat",
-      actionLink: "mailto:isaiahadeleke01@gmail.com",
-      bgColor: "bg-[#E5D4ED] text-[#1A1A1A]",
-      rotation: "rotate-[4deg] hover:rotate-[0deg]",
-      zIndex: "hover:z-10",
-    },
-  ];
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
+  const headlineY = useTransform(scrollYProgress, [0, 1], [0, 90]);
+  const cardsY = useTransform(scrollYProgress, [0, 1], [0, -55]);
 
   return (
-    <section className="pt-32 md:pt-40 pb-16 md:pb-24 overflow-hidden">
-      <div className="max-w-content mx-auto px-5 md:px-6">
-        {/* Top Header */}
-        <div className="max-w-4xl">
+    <section ref={sectionRef} className="relative pt-32 md:pt-40 pb-16 md:pb-24 overflow-hidden">
+      <div className="absolute inset-x-0 top-0 h-[760px] fine-grid opacity-100 pointer-events-none [mask-image:linear-gradient(to_bottom,black_68%,transparent)]" />
+      <div className="max-w-content mx-auto px-7 md:px-14 lg:px-20 relative">
+        <motion.div style={{ y: headlineY }} className="max-w-[1220px]">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.55 }}
+            className="inline-flex items-center gap-2 rounded-full border border-[#7C56F6]/15 bg-white/75 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-[#7C56F6] shadow-sm"
           >
-            <span className="inline-block bg-[#0B3C2A]/10 text-[#0B3C2A] text-xs font-semibold px-3 py-1.5 rounded-full mb-6">
-              Available for work
-            </span>
+            <span className="relative flex h-2 w-2"><span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-violet-400 opacity-60" /><span className="relative inline-flex h-2 w-2 rounded-full bg-[#7C56F6]" /></span>
+            Available for selected opportunities
           </motion.div>
 
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 38 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight text-[#0B3C2A]"
+            transition={{ duration: 0.8, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+            className="display-heading gradient-ink mt-8 text-[clamp(3rem,6.7vw,6.25rem)]"
           >
-            Hi, I&apos;m Isaiah. <br />
-            <span className="text-[#0B3C2A]/70">Product Designer &amp; Builder.</span>
+            Hi, I&apos;m Isaiah.<br />Product designer <span className="text-[#A48AFB]">&amp;</span> builder.
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-6 text-base md:text-lg text-muted max-w-2xl leading-relaxed font-normal"
+            transition={{ duration: 0.65, delay: 0.22 }}
+            className="mt-8 max-w-3xl text-lg md:text-2xl leading-snug tracking-[-0.025em] text-ink/70"
           >
-            I design intelligent systems where humans and AI collaborate. Formerly Helium Health (YC S17) and Co-founder at Tride. Based in Lagos, Nigeria.
+            Senior Product Designer with{" "}
+            <span className="group/ml relative inline-flex cursor-help border-b border-dashed border-[#7C56F6]/60 text-[#4930A8]">
+              ML
+              <span className="pointer-events-none absolute bottom-full left-1/2 z-50 mb-2 w-max max-w-[260px] -translate-x-1/2 translate-y-1 rounded-xl bg-[#241D35] px-4 py-2.5 text-center text-xs font-medium tracking-normal text-white opacity-0 shadow-xl transition duration-150 group-hover/ml:translate-y-0 group-hover/ml:opacity-100">
+                Machine Learning and Human Computer Interaction
+              </span>
+            </span>{" "}
+            background working at the intersection of design, engineering, AI, and business.
           </motion.p>
-        </div>
 
-        {/* Sticker Cards Container */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-16 md:mt-24"
-        >
-          {/* Horizontal Swiper for Mobile, Grid for Desktop */}
-          <div className="flex md:grid md:grid-cols-4 gap-6 overflow-x-auto md:overflow-visible pb-6 md:pb-0 px-2 -mx-6 md:mx-0 scrollbar-none snap-x snap-mandatory">
-            {cardsData.map((card) => (
-              <motion.div
-                key={card.id}
-                whileHover={{ scale: 1.05, y: -8 }}
-                transition={{ type: "spring", stiffness: 300, damping: 18 }}
-                className={`snap-center flex-shrink-0 w-[280px] md:w-auto h-[340px] md:h-[360px] rounded-2xl p-6 shadow-sm border border-ink/5 flex flex-col justify-between transition-all duration-300 ${card.bgColor} ${card.rotation} ${card.zIndex}`}
-              >
-                {card.type === "photo" ? (
-                  <div className="flex flex-col h-full justify-between p-1 bg-white rounded-xl">
-                    <div className="w-full h-[82%] rounded-lg overflow-hidden bg-creamdark relative border border-ink/5">
-                      <img
-                        src={card.src}
-                        alt="Profile Picture"
-                        className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
-                      />
-                    </div>
-                    <p className="text-center font-serif text-sm font-semibold tracking-tight pt-2 text-[#0B3C2A]">
-                      {card.caption}
-                    </p>
-                  </div>
-                ) : (
-                  <>
-                    <div>
-                      <span className="text-[10px] uppercase tracking-wider opacity-60 font-semibold">
-                        {card.title}
-                      </span>
-                      <p className="mt-4 font-serif text-lg leading-snug font-medium">
-                        {card.text}
-                      </p>
-                    </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, delay: 0.29 }}
+            className="mt-7 max-w-3xl text-base md:text-lg leading-relaxed font-semibold text-ink/80"
+          >
+            Designing clinical AI products at{" "}
+            <span className="group/helium relative inline-flex align-middle">
+              <a href="https://heliumhealth.com" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[#7C56F6]/15 bg-white/90 py-1.5 pl-1.5 pr-3 text-sm font-bold text-[#4930A8] shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+                <span className="flex h-7 w-7 items-center justify-center overflow-hidden rounded-full bg-[#F0ECFF] p-1.5">
+                  <img src="/logos/helium-health.svg" alt="" className="h-full w-full object-contain" />
+                </span>
+                Helium Health (YC ’17)
+              </a>
+              <span className="pointer-events-none absolute bottom-full left-1/2 z-50 mb-3 w-80 -translate-x-1/2 translate-y-2 rounded-[1.5rem] border border-ink/10 bg-white p-3 text-[#241D35] opacity-0 shadow-[0_22px_55px_rgba(36,29,53,.18)] transition duration-200 group-hover/helium:translate-y-0 group-hover/helium:opacity-100">
+                <span className="flex h-32 items-center justify-center rounded-[1.1rem] bg-[#F0ECFF]">
+                  <span className="flex h-20 w-20 items-center justify-center rounded-2xl bg-white p-4 shadow-sm">
+                    <img src="/logos/helium-health.svg" alt="Helium Health logo" className="h-full w-full object-contain" />
+                  </span>
+                </span>
+                <span className="mt-3 block px-1 text-base font-bold">Helium Health</span>
+                <span className="mt-1 block px-1 text-xs font-normal leading-relaxed text-ink/60">Technology and financial infrastructure helping healthcare providers deliver better care across Africa.</span>
+              </span>
+            </span>{" "}
+            {" "}by day. Building products and teaching people how to use AI by night.
+          </motion.div>
+        </motion.div>
 
-                    {card.type === "cta" && card.actionText && card.actionLink ? (
-                      <a
-                        href={card.actionLink}
-                        className="mt-6 inline-flex self-start bg-[#0B3C2A] text-cream text-xs font-semibold px-4 py-2.5 rounded-full hover:bg-ink hover:text-cream transition-all duration-300 shadow-sm"
-                      >
-                        {card.actionText} →
-                      </a>
-                    ) : (
-                      <span className="text-xl self-end opacity-20">★</span>
-                    )}
-                  </>
-                )}
-              </motion.div>
-            ))}
-          </div>
+        <motion.div style={{ y: cardsY }} className="mt-16 md:mt-24 grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-0 md:px-4 items-stretch">
+          {[cards[0], null, cards[1], cards[2]].map((card, index) => card ? (
+            <motion.article
+              key={card.title}
+              initial={{ opacity: 0, y: 50, rotate: card.rotate }}
+              animate={{ opacity: 1, y: 0, rotate: card.rotate, transition: { duration: 0.6, delay: 0.2 + index * 0.07, ease: [0.22, 1, 0.36, 1] } }}
+              whileHover={{ y: index % 2 === 0 ? -40 : -32, x: index === 1 ? 8 : -5, rotate: index % 2 === 0 ? 3 : -3, scale: 1.07, zIndex: 30 }}
+              whileTap={{ scale: 0.98 }}
+              className="relative md:-ml-6 min-h-[270px] md:min-h-[325px] rounded-[1.75rem] p-6 flex flex-col justify-between border border-white/80 shadow-[0_24px_52px_rgba(36,39,37,0.10)]"
+              style={{ backgroundColor: card.color, zIndex: 12 - index }}
+              transition={{ type: "spring", stiffness: 560, damping: 20, mass: 0.55, delay: 0 }}
+            >
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/50">0{index + 1}</span>
+                <h2 className="mt-5 display-heading text-3xl md:text-[2.15rem] text-[#241D35]">{card.title}</h2>
+                <p className="mt-4 text-sm leading-relaxed text-ink/70">{card.text}</p>
+              </div>
+              <Link href={card.href} className="w-fit rounded-xl bg-[#241D35] text-white px-4 py-3 text-xs font-bold shadow-md hover:translate-x-1 transition-transform">
+                {card.action} <span aria-hidden>↗</span>
+              </Link>
+            </motion.article>
+          ) : (
+            <motion.div
+              key="video-card"
+              initial={{ opacity: 0, y: 50, rotate: 1.8 }}
+              animate={{ opacity: 1, y: 0, rotate: 1.8, transition: { duration: 0.6, delay: 0.27, ease: [0.22, 1, 0.36, 1] } }}
+              whileHover={{ y: -38, x: 4, rotate: -2.5, scale: 1.075, zIndex: 30, transition: { type: "spring", stiffness: 560, damping: 20, mass: 0.55, delay: 0 } }}
+              whileTap={{ scale: 0.98 }}
+              className="relative z-20 md:-ml-6 min-h-[270px] md:min-h-[325px] overflow-hidden rounded-[1.75rem] border-[6px] border-white bg-[#2D2350] shadow-[0_24px_52px_rgba(36,39,37,0.15)]"
+            >
+              <img src="/photos/isaiah-headshot.png" alt="Isaiah Adeleke video preview" className="absolute inset-0 h-full w-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+              <button type="button" aria-label="Play Isaiah's introduction video" className="absolute inset-0 flex items-center justify-center group/play">
+                <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white/95 text-[#4930A8] shadow-xl transition-transform duration-200 group-hover/play:scale-110"><span className="ml-1" aria-hidden>▶</span></span>
+              </button>
+              <span className="absolute bottom-5 left-5 rounded-full bg-white/90 px-3 py-1.5 text-[10px] font-bold text-[#2D2350] shadow-sm">Play my story</span>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
-
-      {/* Logo Ticker */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.8, duration: 0.8 }}
-        className="mt-20 md:mt-28 border-t border-b border-ink/5 py-8 bg-[#F0EDE8]/20"
-      >
-        <p className="text-center text-xs uppercase tracking-widest text-muted mb-6 font-semibold">
-          Companies and organizations I&apos;ve collaborated with
-        </p>
-        <Ticker />
-      </motion.div>
     </section>
   );
 }

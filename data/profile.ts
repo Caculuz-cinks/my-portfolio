@@ -1,0 +1,113 @@
+export const profile = {
+  aboutTitle: "I think in design. I build for outcomes.",
+  aboutParagraphs: [
+    "For years, I've struggled to define exactly what I do. Not because I don't know what I'm good at, but because I've spent so much time doing things that don't fit neatly into one job title.",
+    "I started in engineering, studying Artificial Intelligence, Machine Learning, Deep Learning, and Human-Computer Interaction. I wrote code, found my way into graphic design, and eventually became a product designer.",
+    "But I didn't stop there.",
+    "Alongside my career in product design, I've built businesses, taught people, sold products, managed customers, written code, and figured out how to get people to actually use the things I build. Somewhere along the way, I picked up skills in sales, marketing, growth, product management, and customer success.",
+    "For a long time, I felt I had to keep these experiences separate. I was a product designer at work and everything else outside of it.",
+    "Then I realised something: **these experiences weren't distractions from design. They were what made me a better designer.**",
+    "Having worked across different functions, I understand how people think, what they care about, and the challenges they face. I can speak the language of engineers, marketers, salespeople, and business owners because I've done parts of their jobs myself. And that makes it easier to collaborate, challenge assumptions, and build products that actually work.",
+    "AI has made all of this even more interesting. It's helping me bring these previously disconnected skills together, moving from ideas to design, code, experimentation, and execution in ways I couldn't before.",
+    "Today, I'm a Senior Product Designer working at the intersection of **design, business, AI, and growth.** I design AI-powered products and solutions, and build growth systems that help businesses attract, convert, and retain customers.",
+    "I still see myself as a designer, but increasingly, I think of myself as a **product builder who designs with AI and thinks about growth.**",
+    "Because at the end of the day, beautiful interfaces are great, but great customer experiences and measurable business outcomes are what I really care about.",
+    "That's always been my North Star.",
+  ],
+  resumeUrl: "https://docs.google.com/document/d/1MjqdJ57e6n9DujzUPD-REVU7lEWuDNySsVrnbY3tYAY/export?format=pdf",
+  talkUrl: "https://cal.com/isaiah-adeleke/30min",
+  intro:
+    "Hello👋 I’m Isaiah, I design and craft impactful digital experiences and interfaces that help companies and startups bring their visions to life. Whether collaborating with teams or working independently, I support founders and organizations in launching products, driving growth, and scaling with purpose.",
+  education: {
+    title: "Federal University of Technology Akure",
+    subtitle: "B.Eng Computer Engineering (Artificial Intelligence & Human Computer Interaction)",
+  },
+  skills: [
+    "Product Design",
+    "UX Research",
+    "Interaction Design",
+    "Design Systems",
+    "Prototyping",
+    "AI-Assisted Development",
+    "Visual Design",
+    "Motion Design",
+  ],
+  experience: [
+    {
+      company: "HeliumHealth (YC S17)",
+      role: "Senior Product Designer, AI",
+      period: "Nov 2024 – Present",
+      location: "Lagos, Nigeria",
+      highlights: [
+        "Designed HeliumScribe, an AI clinical documentation widget used for 6,173 consultation starts across five pilot hospitals in its first month, with an estimated 650 hours of documentation time potentially saved.",
+        "Built and deployed CareCopilot, a device-local AI assistant for diagnosis, documentation, and treatment planning that brings quality care to 10,000+ people in rural Africa.",
+        "Increased patient consent rate by 4% through a reprompt user flow and iterative design.",
+        "Designed and launched a data analytics dashboard that drove 96% customer retention and reactivated 23.6% of previously churned customers.",
+        "Designed a patient-facing app for 1.5M+ patients, supporting 96% facility retention through access to medical records and appointment booking.",
+      ],
+    },
+    {
+      company: "Rivy (YC S21)",
+      role: "Senior Product Designer",
+      period: "Apr 2025 – Aug 2026 · Contract",
+      location: "Contract",
+      highlights: [
+        "Led the Payhippo-to-Rivy rebrand ahead of a $4M pre-Series A raise, updating brand assets and the product design system with the internal team.",
+        "Led product and design for EnergyStack, generating $35K in its first two months and growing the company's loan book by 8% in that period.",
+        "Reduced drop-offs on a permissions screen by 17% through Amplitude session-replay analysis and a redesigned flow.",
+        "Built a solar calculator with Claude Code that generates approximately 150 leads per month.",
+      ],
+    },
+    {
+      company: "Tride",
+      role: "Founding Product Designer",
+      period: "Jan 2023 – Oct 2024",
+      location: "Lagos, Nigeria",
+      highlights: [
+        "Co-founded and launched Tride, scaling from concept to 60M+ in processed transactions while leading product and design strategy.",
+        "Redesigned the Tride web app in 2 days to accelerate the MVP release through rapid prototyping and design optimization.",
+        "Conducted a research and UX audit that cut onboarding time from 48+ hours to 21 minutes and improved reactivation by 50%.",
+        "Onboarded 100+ B2B customers personally, tailoring solutions to strengthen adoption.",
+      ],
+    },
+    {
+      company: "Kayen Peppa",
+      role: "Product Designer",
+      period: "Dec 2022 – Oct 2024 · Independent Contractor",
+      location: "Miami, Florida",
+      highlights: [
+        "Delivered tailored solutions 2x faster than expected across 20+ projects in health tech, real estate, cybersecurity, fintech, sports, and e-commerce.",
+        "Architected a scalable Figma design system for Centric Software using reusable components, variables, and semantic patterns.",
+      ],
+    },
+    {
+      company: "Medfar",
+      role: "Product Designer",
+      period: "Mar 2022 – May 2022",
+      location: "Montreal, Canada",
+      highlights: [
+        "Led the end-to-end redesign of the NAVA patient–physician app, supporting Medfar’s $30M Series C fundraising.",
+        "Created an onboarding process and file system for new designers that cut onboarding support calls by 80%.",
+      ],
+    },
+    {
+      company: "QuickTest",
+      role: "Product Designer",
+      period: "Mar 2020 – Sep 2021",
+      location: "Akure, Nigeria",
+      highlights: [
+        "Redesigned the web app, helping it grow from 200+ to 4,000+ users in 2 weeks while boosting retention to 86%.",
+        "Created test-taking features that increased weekly test completions by 50%.",
+      ],
+    },
+    {
+      company: "Freelance",
+      role: "Digital Designer",
+      period: "2017 – 2020",
+      location: "International",
+      highlights: [
+        "Collaborated with international clients and designed flyers, logos, and marketing assets.",
+      ],
+    },
+  ],
+};

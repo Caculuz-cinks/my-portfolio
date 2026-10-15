@@ -11,7 +11,7 @@ export default function UIShowcase() {
 
   return (
     <section className="py-20 md:py-28">
-      <div className="max-w-content mx-auto px-5 md:px-6">
+      <div className="max-w-content mx-auto px-7 md:px-14 lg:px-20">
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -58,7 +58,7 @@ export default function UIShowcase() {
         }
       `}</style>
 
-      <div className="max-w-content mx-auto px-5 md:px-6 mt-8">
+      <div className="max-w-content mx-auto px-7 md:px-14 lg:px-20 mt-8">
         <Link
           href="/shots"
           data-cursor-hover

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="800" viewBox="0 0 1400 800">
+  <defs><linearGradient id="paper" x2="1" y2="1"><stop stop-color="#F5F1FF"/><stop offset="1" stop-color="#DDD2FF"/></linearGradient></defs>
+  <rect width="1400" height="800" fill="url(#paper)"/>
+  <circle cx="1250" cy="90" r="300" fill="#7C56F6" opacity=".08"/>
+  <g font-family="Arial, sans-serif">
+    <text x="90" y="110" font-size="22" font-weight="700" letter-spacing="5" fill="#7C56F6">DESIGN PROCESS · RIVY</text>
+    <text x="90" y="240" font-size="76" font-weight="700" letter-spacing="-3" fill="#2D2350">Better context.</text>
+    <text x="90" y="330" font-size="76" font-weight="700" letter-spacing="-3" fill="#2D2350">Better decisions.</text>
+    <text x="94" y="401" font-size="27" fill="#6A5D80">Finding where AI actually helps the design process.</text>
+    <g transform="translate(90 500)">
+      <rect width="340" height="150" rx="24" fill="#FFFFFF"/><text x="28" y="52" font-size="18" fill="#7C56F6">01 · HUMAN CONTEXT</text><text x="28" y="100" font-size="27" fill="#2D2350">Talk to real users</text>
+      <path d="M360 75h55m-14-13 14 13-14 13" fill="none" stroke="#7C56F6" stroke-width="3"/>
+      <g transform="translate(440)"><rect width="340" height="150" rx="24" fill="#7C56F6"/><text x="28" y="52" font-size="18" fill="#E9E1FF">02 · AI AUDIT</text><text x="28" y="100" font-size="27" fill="#FFFFFF">Apply what we know</text></g>
+      <path d="M800 75h55m-14-13 14 13-14 13" fill="none" stroke="#7C56F6" stroke-width="3"/>
+      <g transform="translate(880)"><rect width="340" height="150" rx="24" fill="#FFFFFF"/><text x="28" y="52" font-size="18" fill="#7C56F6">03 · DESIGN JUDGMENT</text><text x="28" y="100" font-size="27" fill="#2D2350">Craft the final work</text></g>
+    </g>
+    <text x="94" y="740" font-size="20" fill="#6A5D80">ISAIAH ADELEKE · JUNE 2026</text>
+  </g>
+</svg>

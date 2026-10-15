@@ -1,0 +1,61 @@
+"use client";
+
+import { motion } from "framer-motion";
+import Reveal from "./Reveal";
+
+const organizations = [
+  { name: "HNG", logo: "/logos/hng.png", href: "https://hng.tech/internship", className: "object-cover" },
+  { name: "Zuri", logo: "/logos/zuri.jpg", href: "https://zuri.team", className: "rounded-xl object-cover" },
+  { name: "Stutern", logo: "/logos/stutern.png", href: "https://www.stutern.africa", className: "object-contain" },
+  { name: "AltSchool Africa", logo: "/logos/altschool.webp", href: "https://altschoolafrica.com", className: "object-contain" },
+  { name: "Avocademy", logo: "/logos/avocademy.png", href: "https://www.avocademy.com", className: "object-cover" },
+];
+
+export default function MentorshipSection() {
+  return (
+    <section className="py-12 md:py-20 overflow-hidden">
+      <div className="max-w-content mx-auto px-7 md:px-14 lg:px-20">
+        <div className="relative overflow-hidden rounded-[2rem] bg-[#2D2350] px-6 py-9 text-white shadow-[0_28px_80px_rgba(45,35,80,.18)] md:px-10 md:py-12">
+          <div className="absolute -right-24 -top-32 h-80 w-80 rounded-full bg-[#7C56F6]/55 blur-3xl" />
+          <div className="absolute -bottom-28 left-1/4 h-64 w-64 rounded-full bg-[#B6A5FF]/20 blur-3xl" />
+
+          <div className="relative grid gap-10 lg:grid-cols-[1.05fr_.95fr] lg:items-end">
+            <Reveal>
+              <h2 className="display-heading max-w-2xl text-4xl md:text-6xl">I give back.</h2>
+              <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/70 md:text-lg">
+                For the past 5 years, I&apos;ve mentored and taught 20,000+ of designers globally through organizations including HNG, Zuri, Stutern, AltSchool Africa, and Avocademy (YC W22).
+              </p>
+              <div className="mt-8 inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-semibold backdrop-blur">
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#7C56F6]">↗</span>
+                20,000+ designers reached
+              </div>
+            </Reveal>
+
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-2">
+              {organizations.map((organization, index) => (
+                <motion.a
+                  key={organization.name}
+                  href={organization.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                  whileHover={{ y: -7, rotate: index % 2 === 0 ? -1.5 : 1.5, transition: { type: "spring", stiffness: 500, damping: 22 } }}
+                  className={`flex min-h-24 items-center gap-3 rounded-[1.25rem] border border-white/70 bg-white p-4 text-[#241D35] shadow-lg ${index === organizations.length - 1 ? "sm:col-span-2 lg:col-span-2" : ""}`}
+                >
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-[#F4F1FF] p-2">
+                    <img src={organization.logo} alt={`${organization.name} logo`} className={`h-full w-full rounded-lg ${organization.className}`} />
+                  </span>
+                  <span className="font-bold">{organization.name}</span>
+                  {organization.name === "Avocademy" && <span className="ml-auto rounded-full bg-[#7C56F6]/10 px-2 py-1 text-[9px] font-bold text-[#4930A8]">YC W22</span>}
+                </motion.a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

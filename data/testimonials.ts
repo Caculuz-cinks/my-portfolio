@@ -13,14 +13,8 @@ export const testimonials: Testimonial[] = [
   },
   {
     quote:
-      "Isaiah is a multi-talented designer who handled our project from start to finish with remarkable expertise. He managed everything from brand and packaging design to website design and building a fully functional Shopify store, ensuring every aspect aligned seamlessly. His attention to detail, creativity, and ability to deliver high-quality results are exceeded our expectations. I highly recommend Isaiah to any team looking for a versatile, reliable, and talented designer who can bring ideas to life.",
+      "Isaiah is an multi-talented designer who handled our project from start to finish with remarkable expertise. He managed everything from brand and packaging design to website design and building a fully functional Shopify store, ensuring every aspect aligned seamlessly. His attention to detail, creativity, and ability to deliver high-quality results across multiple areas exceeded our expectations. I highly recommend Isaiah to any team looking for a versatile, reliable, and talented designer who can bring ideas to life.",
     name: "Angel Idusuyi",
-    role: "Manager, Michigan",
-  },
-  {
-    quote:
-      "Since discovering Isaiah and his team, I've stuck with them as my go-to designers. They've handled everything from branding and illustrations to website design, and more recently, the design of my book, which included hundreds of fully custom illustrations. Isaiah and his team delivered print-ready work with impeccable attention to detail, and their professionalism and creativity make them an invaluable asset. I highly recommend them for any design project.",
-    name: "Kati Frantz",
-    role: "Founder, Charting A to Teal",
+    role: "Manager, AfroOrganic",
   },
 ];
