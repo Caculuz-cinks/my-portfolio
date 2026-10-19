@@ -128,19 +128,16 @@ export default function HeroSection() {
             </motion.article>
           ) : (
             <motion.div
-              key="video-card"
+              key="portrait-card"
               initial={{ opacity: 0, y: 50, rotate: 1.8 }}
               animate={{ opacity: 1, y: 0, rotate: 1.8, transition: { duration: 0.6, delay: 0.27, ease: [0.22, 1, 0.36, 1] } }}
               whileHover={{ y: -38, x: 4, rotate: -2.5, scale: 1.075, zIndex: 30, transition: { type: "spring", stiffness: 560, damping: 20, mass: 0.55, delay: 0 } }}
               whileTap={{ scale: 0.98 }}
               className="relative z-20 md:-ml-6 min-h-[270px] md:min-h-[325px] overflow-hidden rounded-[1.75rem] border-[6px] border-white bg-[#2D2350] shadow-[0_24px_52px_rgba(36,39,37,0.15)]"
             >
-              <img src="/photos/isaiah-headshot.png" alt="Isaiah Adeleke video preview" className="absolute inset-0 h-full w-full object-cover" />
+              <img src="/photos/isaiah-hero.png" alt="Isaiah Adeleke" className="absolute inset-0 h-full w-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
-              <button type="button" aria-label="Play Isaiah's introduction video" className="absolute inset-0 flex items-center justify-center group/play">
-                <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white/95 text-[#4930A8] shadow-xl transition-transform duration-200 group-hover/play:scale-110"><span className="ml-1" aria-hidden>▶</span></span>
-              </button>
-              <span className="absolute bottom-5 left-5 rounded-full bg-white/90 px-3 py-1.5 text-[10px] font-bold text-[#2D2350] shadow-sm">Play my story</span>
+              <span className="absolute bottom-5 left-5 rounded-full bg-white/90 px-3 py-1.5 text-[10px] font-bold text-[#2D2350] shadow-sm">Isaiah Adeleke</span>
             </motion.div>
           ))}
         </motion.div>

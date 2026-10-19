@@ -69,15 +69,15 @@ export default function CaseStudyNavigation({ items }: { items: NavigationItem[]
     <>
       <nav
         aria-label="Case study sections"
-        className="sticky top-20 z-30 -mx-2 mb-7 overflow-x-auto rounded-2xl border border-white bg-[#FCFAF6]/90 p-2 shadow-[0_12px_40px_rgba(36,39,37,.08)] backdrop-blur-xl no-scrollbar lg:hidden"
+        className="sticky top-20 z-30 -mx-2 mb-7 overflow-x-auto rounded-2xl border border-white bg-[#FCFAF6]/90 p-2 shadow-[0_12px_40px_rgba(36,39,37,.08)] backdrop-blur-xl no-scrollbar min-[1440px]:hidden"
       >
         <div className="flex gap-1">{links}</div>
       </nav>
 
-      <aside className="hidden lg:sticky lg:top-28 lg:block lg:self-start">
+      <aside className="absolute inset-y-0 right-[calc(100%+24px)] hidden w-[190px] min-[1440px]:block">
         <nav
           aria-label="Case study sections"
-          className="rounded-[1.4rem] border border-white bg-[#FCFAF6]/90 p-4 shadow-[0_20px_60px_rgba(36,39,37,.07)] backdrop-blur-xl"
+          className="sticky top-28 max-h-[calc(100dvh-140px)] overflow-y-auto rounded-[1.4rem] border border-white bg-[#FCFAF6]/90 p-4 shadow-[0_20px_60px_rgba(36,39,37,.07)] backdrop-blur-xl"
         >
           <p className="mb-3 px-3 text-[10px] font-bold uppercase tracking-[0.18em] text-[#7C56F6]">
             On this page

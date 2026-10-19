@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Reveal from "./Reveal";
-import { profile } from "@/data/profile";
 
 export default function AboutPreview() {
   return (

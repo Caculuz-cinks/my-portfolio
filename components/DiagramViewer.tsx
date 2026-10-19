@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 
-export default function DiagramViewer({ src, alt, title }: { src: string; alt: string; title: string }) {
+export default function DiagramViewer({ src, alt, title, square = false }: { src: string; alt: string; title: string; square?: boolean }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const canvasRef = useRef<HTMLDivElement>(null);
   const [zoom, setZoom] = useState(1);
@@ -14,7 +14,7 @@ export default function DiagramViewer({ src, alt, title }: { src: string; alt: s
 
   return (
     <figure>
-      <button type="button" onClick={() => { fit(); dialogRef.current?.showModal(); }} aria-label={`View ${title} in full`} className="group/diagram relative block h-56 w-full overflow-hidden rounded-[1.4rem] border border-ink/10 bg-[#F0EDE8] text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7C56F6] md:h-72">
+      <button type="button" onClick={() => { fit(); dialogRef.current?.showModal(); }} aria-label={`View ${title} in full`} className={`group/diagram relative block h-56 w-full overflow-hidden border bg-[#F0EDE8] text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7C56F6] md:h-72 ${square ? "rounded-none border-ink/5" : "rounded-[1.4rem] border-ink/10"}`}>
         <img src={src} alt={alt} loading="lazy" className="h-full w-full object-cover object-top" />
         <span className="absolute inset-0 bg-gradient-to-t from-[#241D35]/60 via-transparent to-transparent" />
         <span className="absolute inset-0 flex items-center justify-center bg-[#241D35]/15 opacity-100 transition-opacity sm:opacity-0 sm:group-hover/diagram:opacity-100 sm:group-focus-visible/diagram:opacity-100"><span className="rounded-full bg-white px-5 py-3 text-sm font-bold text-[#4930A8] shadow-xl">View in full ↗</span></span>

@@ -30,6 +30,9 @@ export default function ProjectDetailPage({
 }) {
   const project = getProjectBySlug(params.slug);
   if (!project) return notFound();
+  const imageFrameClass = project.slug === "energystack"
+    ? "overflow-hidden rounded-none border border-ink/5 bg-white"
+    : "overflow-hidden rounded-[1.4rem] border border-ink/10 bg-[#F0EDE8]";
 
   const navigationItems = [
     { id: "case-study-overview", label: "Overview" },
@@ -91,7 +94,11 @@ export default function ProjectDetailPage({
 
         {/* Hero mockup */}
         <Reveal delay={0.15}>
-          {project.heroImage ? (
+          {project.heroVideo ? (
+            <div className="mt-12 w-full overflow-hidden rounded-[2rem] border border-white bg-[#F0EDE8] shadow-[0_30px_75px_rgba(36,39,37,0.12)]">
+              <video src={project.heroVideo.src} poster={project.heroVideo.poster} aria-label={project.heroVideo.label} autoPlay muted loop playsInline preload="metadata" className="block h-auto w-full" />
+            </div>
+          ) : project.heroImage ? (
             <div className="mt-12 w-full overflow-hidden rounded-[2rem] border border-white bg-[#F0EDE8] shadow-[0_30px_75px_rgba(36,39,37,0.12)]">
               <img
                 src={project.heroImage.src}
@@ -125,11 +132,11 @@ export default function ProjectDetailPage({
         </Reveal>
 
         {/* Long-form sections */}
-        <div className="mx-auto mt-20 max-w-6xl lg:-ml-16 lg:grid lg:grid-cols-[190px_minmax(0,1fr)] lg:items-start lg:gap-6 xl:-ml-28 2xl:-ml-36">
+        <div className="relative mt-20">
           <CaseStudyNavigation items={navigationItems} />
 
           <div className="space-y-10">
-          {project.sections.map((section, i) => (
+          {project.sections.map((section) => (
             <section key={section.heading} id={sectionId(section.heading)} className="scroll-mt-32">
             <Reveal className="page-card p-7 md:p-10">
               <h2 className="display-heading text-3xl md:text-4xl text-[#2D2350] mb-6">
@@ -187,10 +194,14 @@ export default function ProjectDetailPage({
                         return <p key={blockIndex} className="text-lg font-semibold leading-relaxed text-[#2D2350]">{block.text}</p>;
                       }
 
+                      if (block.type === "callout") {
+                        return <aside key={blockIndex} className="rounded-r-xl border-l-4 border-[#7C56F6] bg-[#7C56F6]/[0.055] px-5 py-5 text-lg font-semibold leading-relaxed text-[#2D2350] md:px-6">{block.text}</aside>;
+                      }
+
                       if (block.type === "image") {
                         return (
                           <figure key={blockIndex} className="pt-3">
-                            <div className="overflow-hidden rounded-[1.4rem] border border-ink/10 bg-[#F0EDE8]">
+                            <div className={imageFrameClass}>
                               <img src={block.src} alt={block.alt} className="h-auto w-full" />
                             </div>
                             {block.caption && <figcaption className="mt-3 text-sm font-semibold text-[#2D2350]">{block.caption}</figcaption>}
@@ -229,7 +240,7 @@ export default function ProjectDetailPage({
 
               {section.image && (
                 <figure className="mt-8">
-                  <div className="overflow-hidden rounded-[1.4rem] border border-ink/10 bg-[#F0EDE8]">
+                  <div className={imageFrameClass}>
                     <img
                       src={section.image.src}
                       alt={section.image.alt}
@@ -246,9 +257,9 @@ export default function ProjectDetailPage({
 
               {section.images && (
                 <div className={`mt-8 ${section.imageLayout === "stacked" ? "space-y-6" : "grid grid-cols-1 gap-4 sm:grid-cols-2"}`}>
-                  {section.images.map((image) => image.fullSize ? <DiagramViewer key={image.src} src={image.src} alt={image.alt} title={image.caption ?? image.alt} /> : (
+                  {section.images.map((image) => image.fullSize ? <DiagramViewer key={image.src} src={image.src} alt={image.alt} title={image.caption ?? image.alt} square={project.slug === "energystack"} /> : (
                     <figure key={image.src}>
-                      <div className="overflow-hidden rounded-[1.4rem] border border-ink/10 bg-[#F0EDE8]">
+                      <div className={imageFrameClass}>
                         <img src={image.src} alt={image.alt} className="w-full h-auto" />
                       </div>
                       {image.caption && <figcaption className="mt-3 text-sm font-semibold text-[#2D2350]">{image.caption}</figcaption>}

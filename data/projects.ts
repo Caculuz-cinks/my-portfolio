@@ -18,6 +18,7 @@ export type ProjectSection = {
   blocks?: (
     | { type: "paragraph"; text: string }
     | { type: "highlight"; text: string }
+    | { type: "callout"; text: string }
     | { type: "subheading"; text: string }
     | { type: "quote"; text: string }
     | { type: "bullets"; items: string[] }
@@ -48,6 +49,7 @@ export type Project = {
   heroImage?: { src: string; alt: string };
   previewImage?: { src: string; alt: string };
   previewVideo?: { src: string; label: string; poster?: string };
+  heroVideo?: { src: string; label: string; poster?: string };
   heroVisual?: Extract<ProjectVisual, { type: "showcase" }>;
   platform?: string;
   sourceUrl?: string;
@@ -56,6 +58,14 @@ export type Project = {
 const projectCatalog: Project[] = [
   {
     slug: "energystack",
+    previewVideo: {
+      src: "/case-studies/energystack/ecommerce-financing-walkthrough.mp4",
+      label: "EnergyStack ecommerce and financing walkthrough",
+    },
+    heroVideo: {
+      src: "/case-studies/energystack/ecommerce-financing-walkthrough.mp4",
+      label: "EnergyStack ecommerce and financing walkthrough",
+    },
     year: "2026",
     tags: ["Ecommerce", "Fintech"],
     title: "How user research helped turn EnergyStack into a $450K+ business",
@@ -85,12 +95,13 @@ const projectCatalog: Project[] = [
     sections: [
       {
         heading: "The idea: Making solar financing and shopping easier",
-        paragraphs: [
-          "At Rivy (formerly Payhippo), we provided financing for customers purchasing solar installations. But customers still needed to be connected to solar vendors to complete their purchases.",
-          "We saw an opportunity to bring both experiences together.",
-          "The initial idea was a marketplace where solar vendors could upload and manage their products, while customers could browse, purchase, and access financing through Rivy.",
-          "We conducted initial research, received positive feedback, and designed detailed user flows for vendors, customers, and internal administrators.",
-          "We then created a prototype to validate the concept with our existing solar vendor partners.",
+        paragraphs: [],
+        blocks: [
+          { type: "paragraph", text: "At Rivy (formerly Payhippo), we provided financing for customers purchasing solar installations. But customers still needed to be connected to solar vendors to complete their purchases." },
+          { type: "paragraph", text: "We saw an opportunity to bring both experiences together." },
+          { type: "callout", text: "The initial idea was a marketplace where solar vendors could upload and manage their products, while customers could browse, purchase, and access financing through Rivy." },
+          { type: "paragraph", text: "We conducted initial research, received positive feedback, and designed detailed user flows for vendors, customers, and internal administrators." },
+          { type: "paragraph", text: "We then created a prototype to validate the concept with our existing solar vendor partners." },
         ],
         images: [
           { src: "/case-studies/energystack/solar-vendor-flow.svg", alt: "Solar vendor flow for the original EnergyStack marketplace concept", caption: "Solar vendor flow", fullSize: true },
@@ -107,7 +118,7 @@ const projectCatalog: Project[] = [
           { type: "paragraph", text: "So I asked a question:" },
           { type: "quote", text: "Who on your team would be responsible for uploading and managing your products?" },
           { type: "paragraph", text: "That was when we discovered the problem." },
-          { type: "paragraph", text: "The vendors weren't interested in managing another e-commerce platform. They already had established sales processes for their high-ticket solar products, and maintaining an online catalogue meant additional work they didn't want." },
+          { type: "callout", text: "The vendors weren't interested in managing another e-commerce platform. They already had established sales processes for their high-ticket solar products, and maintaining an online catalogue meant additional work they didn't want." },
           { type: "paragraph", text: "Our research had validated the opportunity, but not the business model we had designed around it." },
         ],
         visual: {
@@ -120,12 +131,13 @@ const projectCatalog: Project[] = [
       },
       {
         heading: "From marketplace to commerce platform",
-        paragraphs: [
-          "The research prompted a broader team discussion about how we could solve the same customer problem without relying on vendors to manage storefronts.",
-          "We collectively decided to pivot.",
-          "Instead of building a multi-vendor marketplace, Rivy would own the customer-facing commerce experience, listing and selling solar products while working with vendors to supply and install them.",
-          "This introduced new operational responsibilities. The company brought in a Head of E-commerce, while we built pricing, inventory, and vendor fulfilment management into our existing internal admin portal.",
-          "As Lead Product Designer, I led product design through the transition, working with another designer and four engineers to translate the new direction into a working product.",
+        paragraphs: [],
+        blocks: [
+          { type: "paragraph", text: "The research prompted a broader team discussion about how we could solve the same customer problem without relying on vendors to manage storefronts." },
+          { type: "paragraph", text: "We collectively decided to pivot." },
+          { type: "callout", text: "Instead of building a multi-vendor marketplace, Rivy would own the customer-facing commerce experience, listing and selling solar products while working with vendors to supply and install them." },
+          { type: "paragraph", text: "This introduced new operational responsibilities. The company brought in a Head of E-commerce, while we built pricing, inventory, and vendor fulfilment management into our existing internal admin portal." },
+          { type: "paragraph", text: "As Lead Product Designer, I led product design through the transition, working with another designer and four engineers to translate the new direction into a working product." },
         ],
         visual: {
           type: "flow",
@@ -152,20 +164,13 @@ const projectCatalog: Project[] = [
           "Working closely with engineering, we moved from the redesigned concept to a working MVP in approximately four weeks.",
           "We subsequently integrated EnergyStack into Rivy's mobile app.",
         ],
-        visual: {
-          type: "showcase",
-          title: "What we shipped",
-          slots: [
-            { label: "Homepage", detail: "Web storefront screen" },
-            { label: "Product listing", detail: "Browse screen" },
-            { label: "Product details", detail: "Product screen" },
-            { label: "Shopping cart", detail: "Cart screen" },
-            { label: "Checkout", detail: "Cash and financing options" },
-            { label: "Mobile experience", detail: "Rivy app screenshots" },
-            { label: "Internal admin portal", detail: "Pricing, inventory, and fulfilment screens" },
-          ],
-          caption: "A web-first solar commerce experience, designed and launched in approximately four weeks, with integrated financing and operational tools.",
-        },
+        images: [
+          { src: "/case-studies/energystack/mvp-product-listing.svg", alt: "EnergyStack product listing with filters and solar bundles", caption: "Product listing" },
+          { src: "/case-studies/energystack/mvp-order-details.svg", alt: "EnergyStack order details with items, payment status, and delivery information", caption: "Order details" },
+          { src: "/case-studies/energystack/mvp-loan-details.svg", alt: "EnergyStack loan details with repayment schedule and loan status", caption: "Loan details" },
+          { src: "/case-studies/energystack/mvp-mobile.svg", alt: "EnergyStack mobile homepage, product listing, and order confirmation screens", caption: "Mobile experience" },
+        ],
+        imageLayout: "stacked",
       },
       {
         heading: "Improving conversion by making financing visible earlier",
@@ -173,31 +178,29 @@ const projectCatalog: Project[] = [
         blocks: [
           { type: "paragraph", text: "After launch, we noticed a problem. EnergyStack was attracting visitors, but many weren't progressing to purchase." },
           { type: "paragraph", text: "We conducted a user research audit to understand why." },
-          { type: "paragraph", text: "The biggest friction was cost. Solar installations were expensive, and although Rivy offered financing with as little as 10% upfront and repayment spread over several months, customers only discovered this option when they reached checkout." },
+          { type: "callout", text: "The biggest friction was cost. Solar installations were expensive, and although Rivy offered financing with as little as 10% upfront and repayment spread over several months, customers only discovered this option when they reached checkout." },
+          { type: "image", src: "/case-studies/energystack/financing-before-checkout.svg", alt: "Original EnergyStack checkout where Rivy financing appeared only at the payment step", caption: "Before: Financing was hidden until checkout." },
           { type: "paragraph", text: "By then, many had already left." },
           { type: "paragraph", text: "We realised we were presenting financing as a payment method when it could be a reason to purchase in the first place." },
           { type: "subheading", text: "What we changed" },
           { type: "paragraph", text: "We redesigned how financing appeared throughout the shopping journey." },
-          { type: "subheading", text: "Homepage: Sell affordability from the beginning" },
+          { type: "subheading", text: "Homepage: Show affordability from the beginning" },
           { type: "paragraph", text: "We introduced financing-led banners and product promotions highlighting the option to pay a fraction of the product cost upfront." },
-          { type: "subheading", text: "Product details: Make financing tangible" },
+          { type: "image", src: "/case-studies/energystack/mvp-homepage.svg", alt: "EnergyStack homepage promoting an upfront payment with the balance spread over 18 months", caption: "Homepage: Introducing affordability from the beginning." },
+          { type: "subheading", text: "Product details: Make financing visible just where they see the prices" },
           { type: "paragraph", text: "Instead of showing only the full price, we displayed personalised financing breakdowns for each product, including the upfront payment and repayment options." },
-          { type: "subheading", text: "Checkout: Keep the choice simple" },
+          { type: "image", src: "/case-studies/energystack/financing-product-details.svg", alt: "EnergyStack product details with monthly payments, upfront cost, and a Get Financing action", caption: "Product details: Making the financing option tangible." },
+          { type: "subheading", text: "Checkout: Preserve the choice and show possibility of financing still" },
           { type: "paragraph", text: "Customers could still pay outright or use financing, but they now understood their options before reaching checkout." },
+          { type: "image", src: "/case-studies/energystack/financing-checkout.svg", alt: "Updated EnergyStack checkout with an order summary and visible financing breakdown", caption: "Checkout: Keeping financing visible alongside the order summary." },
         ],
-        visual: {
-          type: "beforeAfter",
-          columns: [
-            { heading: "Before", items: ["Homepage focused primarily on products and full prices", "Product details showed the full product cost", "Financing was introduced at checkout"] },
-            { heading: "After", items: ["Homepage banners promoted financing", "Product details displayed the 10% upfront payment and repayment breakdown", "Checkout retained both cash and financing options"] },
-          ],
-        },
       },
       {
         heading: "The impact",
-        paragraphs: [
-          "Following the redesign, financing grew from 47% to 89% of checkouts.",
-          "By bringing affordability into the product discovery experience, we aligned EnergyStack more closely with what customers needed and Rivy's financing objectives.",
+        paragraphs: [],
+        blocks: [
+          { type: "callout", text: "Following the redesign, financing grew from 47% to 89% of checkouts." },
+          { type: "paragraph", text: "By bringing affordability into the product discovery experience, we aligned EnergyStack more closely with what customers needed and Rivy's financing objectives." },
         ],
         visual: {
           type: "groupedBars",

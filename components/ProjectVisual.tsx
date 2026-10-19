@@ -47,21 +47,19 @@ export default function ProjectVisual({ visual, compact = false }: { visual: Pro
 
   if (visual.type === "flow") {
     return (
-      <div className="grid gap-4 md:grid-cols-2" aria-label="Business model before and after the pivot">
+      <div className="space-y-9 border-y border-ink/10 py-7" aria-label="Business model before and after the pivot">
         {visual.columns.map((column, columnIndex) => (
-          <div key={column.heading} className={`rounded-[1.4rem] border p-5 md:p-6 ${columnIndex === 0 ? "border-ink/10 bg-[#F6F4F0]" : "border-[#7C56F6]/25 bg-[#F2EEFF]"}`}>
-            <p className={`mb-5 text-xs font-bold uppercase tracking-[.16em] ${columnIndex === 0 ? "text-ink/45" : "text-[#7C56F6]"}`}>{column.heading}</p>
-            {column.steps.map((step, index) => (
-              <div key={step.title}>
-                {index > 0 && <div className="py-2 text-center text-xl text-[#7C56F6]/60" aria-hidden="true">↓</div>}
-                <div className="rounded-xl border border-white/80 bg-white/85 p-4 shadow-sm">
-                  <div className="flex items-start gap-3">
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#7C56F6]/10 text-xs font-bold text-[#7C56F6]">{index + 1}</span>
-                    <div><p className="font-bold text-[#2D2350]">{step.title}</p><p className="mt-1 text-xs leading-relaxed text-ink/55">{step.description}</p></div>
-                  </div>
-                </div>
-              </div>
-            ))}
+          <div key={column.heading}>
+            <p className={`mb-4 text-xs font-semibold ${columnIndex === 0 ? "text-ink/60" : "text-[#4930A8]"}`}>{column.heading}</p>
+            <ol className="grid grid-cols-3 gap-6 md:gap-10">
+              {column.steps.map((step, index) => (
+                <li key={step.title} className="relative min-w-0">
+                  <div className={`flex min-h-[76px] items-center justify-center rounded-md border bg-white px-2 py-3 text-center text-xs font-semibold leading-snug md:text-sm ${columnIndex === 0 ? "border-ink/25 text-ink/85" : "border-[#7C56F6]/50 text-[#4930A8]"}`}>{step.title}</div>
+                  {index < column.steps.length - 1 && <span className="absolute -right-6 top-[38px] w-6 -translate-y-1/2 text-ink/50 md:-right-10 md:w-10" aria-hidden="true"><svg viewBox="0 0 40 12" fill="none" className="h-3 w-full" preserveAspectRatio="none"><path d="M0 6H38M33 1L38 6L33 11" stroke="currentColor" strokeWidth="1.25" vectorEffect="non-scaling-stroke" /></svg></span>}
+                  <p className="mt-2 text-[10px] leading-relaxed text-ink/60 md:text-xs">{step.description}</p>
+                </li>
+              ))}
+            </ol>
           </div>
         ))}
       </div>
