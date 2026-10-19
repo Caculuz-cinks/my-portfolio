@@ -59,11 +59,11 @@ const projectCatalog: Project[] = [
   {
     slug: "energystack",
     previewVideo: {
-      src: "/case-studies/energystack/ecommerce-financing-walkthrough.mp4",
+      src: "/case-studies/energystack/ecommerce-financing-walkthrough.mp4?v=237fa262",
       label: "EnergyStack ecommerce and financing walkthrough",
     },
     heroVideo: {
-      src: "/case-studies/energystack/ecommerce-financing-walkthrough.mp4",
+      src: "/case-studies/energystack/ecommerce-financing-walkthrough.mp4?v=237fa262",
       label: "EnergyStack ecommerce and financing walkthrough",
     },
     year: "2026",
@@ -115,6 +115,7 @@ const projectCatalog: Project[] = [
         blocks: [
           { type: "paragraph", text: "We scheduled a prototype walkthrough with representatives from three solar vendors who were already working with Rivy." },
           { type: "paragraph", text: "The presentation went well on the surface. Nobody had negative feedback, but there wasn't much excitement either." },
+          { type: "image", src: "/case-studies/energystack/user-research.png", alt: "EnergyStack prototype walkthrough with solar vendor representatives during a user research session" },
           { type: "paragraph", text: "So I asked a question:" },
           { type: "quote", text: "Who on your team would be responsible for uploading and managing your products?" },
           { type: "paragraph", text: "That was when we discovered the problem." },
