@@ -59,11 +59,11 @@ const projectCatalog: Project[] = [
   {
     slug: "energystack",
     previewVideo: {
-      src: "/case-studies/energystack/ecommerce-financing-walkthrough.mp4?v=237fa262",
+      src: "/case-studies/energystack/ecommerce-financing-walkthrough.mp4?v=ac7a071c",
       label: "EnergyStack ecommerce and financing walkthrough",
     },
     heroVideo: {
-      src: "/case-studies/energystack/ecommerce-financing-walkthrough.mp4?v=237fa262",
+      src: "/case-studies/energystack/ecommerce-financing-walkthrough.mp4?v=ac7a071c",
       label: "EnergyStack ecommerce and financing walkthrough",
     },
     year: "2026",

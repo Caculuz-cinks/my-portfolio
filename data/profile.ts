@@ -14,7 +14,7 @@ export const profile = {
     "Because at the end of the day, beautiful interfaces are great, but great customer experiences and measurable business outcomes are what I really care about.",
     "That's always been my North Star.",
   ],
-  resumeUrl: "https://docs.google.com/document/d/1MjqdJ57e6n9DujzUPD-REVU7lEWuDNySsVrnbY3tYAY/export?format=pdf",
+  resumeUrl: "https://drive.google.com/file/d/1ixFpcOyPBfF903GXARavrw5YyzMY9vVF/view?usp=sharing",
   talkUrl: "https://cal.com/isaiah-adeleke/30min",
   intro:
     "Hello👋 I’m Isaiah, I design and craft impactful digital experiences and interfaces that help companies and startups bring their visions to life. Whether collaborating with teams or working independently, I support founders and organizations in launching products, driving growth, and scaling with purpose.",

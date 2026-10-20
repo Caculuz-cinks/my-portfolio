@@ -28,7 +28,7 @@ export default function AboutPage() {
             <Reveal delay={0.12}>
               <div className="mt-9 flex flex-wrap gap-3 border-t border-ink/10 pt-8">
                 <a href={profile.talkUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 rounded-xl bg-[#241D35] px-6 py-4 text-sm font-bold text-white hover:bg-[#4930A8] transition-colors">Let&apos;s talk <span aria-hidden="true">↗</span></a>
-                <a href={profile.resumeUrl} className="inline-flex items-center gap-3 rounded-xl border border-[#7C56F6]/25 bg-white px-6 py-4 text-sm font-bold text-[#4930A8] hover:bg-[#F1EDFF] transition-colors">Download résumé <span aria-hidden="true">↓</span></a>
+                <a href={profile.resumeUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 rounded-xl border border-[#7C56F6]/25 bg-white px-6 py-4 text-sm font-bold text-[#4930A8] hover:bg-[#F1EDFF] transition-colors">View Resume <span aria-hidden="true">↗</span></a>
               </div>
             </Reveal>
           </div>
