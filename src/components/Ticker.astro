@@ -1,0 +1,31 @@
+---
+const logos = Array.from(
+  { length: 14 },
+  (_, index) => `/logos/clients/client-${String(index + 1).padStart(2, "0")}.svg`,
+);
+const items = [...logos, ...logos];
+---
+
+<div
+  class="relative w-full overflow-hidden"
+  style="-webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);"
+>
+  <div class="flex w-max animate-ticker-scroll items-center gap-14 py-3 md:gap-20">
+    {items.map((logo, i) => {
+      const isLargerLogo = logo.endsWith("client-03.svg") || logo.endsWith("client-04.svg");
+
+      return (
+        <span class="flex h-8 w-28 shrink-0 items-center justify-center md:h-9 md:w-32">
+          <img
+            src={logo}
+            alt=""
+            aria-hidden="true"
+            loading={i < logos.length ? "eager" : "lazy"}
+            decoding="async"
+            class:list={["h-full w-full object-contain opacity-60 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0", isLargerLogo && "scale-[1.18] md:scale-125"]}
+          />
+        </span>
+      );
+    })}
+  </div>
+</div>

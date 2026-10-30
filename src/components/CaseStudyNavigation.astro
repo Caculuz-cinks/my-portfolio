@@ -1,0 +1,78 @@
+---
+type NavigationItem = {
+  id: string;
+  label: string;
+};
+
+const { items } = Astro.props as { items: NavigationItem[] };
+const linkClass = "group relative flex shrink-0 items-center gap-2 rounded-xl px-3 py-2 text-sm transition-colors text-ink/55 hover:bg-[#7C56F6]/5 hover:text-ink aria-[current=location]:bg-[#7C56F6]/10 aria-[current=location]:font-semibold aria-[current=location]:text-[#4930A8] aria-[current=location]:hover:bg-[#7C56F6]/10";
+---
+
+<nav
+  aria-label="Case study sections"
+  class="sticky top-20 z-30 -mx-2 mb-7 overflow-x-auto rounded-2xl border border-white bg-[#FCFAF6]/90 p-2 shadow-[0_12px_40px_rgba(36,39,37,.08)] backdrop-blur-xl no-scrollbar min-[1440px]:hidden"
+>
+  <div class="flex gap-1">
+    {items.map((item, index) => (
+      <a href={`#${item.id}`} data-section-link={item.id} aria-current={index === 0 ? "location" : undefined} class={linkClass}>
+        <span class="hidden h-1.5 w-1.5 shrink-0 rounded-full bg-[#7C56F6] group-aria-[current=location]:block group-aria-[current=location]:animate-[dot-in_.3s_cubic-bezier(.34,1.56,.64,1)]"></span>
+        <span>{item.label}</span>
+      </a>
+    ))}
+  </div>
+</nav>
+
+<aside class="absolute inset-y-0 right-[calc(100%+24px)] hidden w-[190px] min-[1440px]:block">
+  <nav
+    aria-label="Case study sections"
+    class="sticky top-28 max-h-[calc(100dvh-140px)] overflow-y-auto rounded-[1.4rem] border border-white bg-[#FCFAF6]/90 p-4 shadow-[0_20px_60px_rgba(36,39,37,.07)] backdrop-blur-xl"
+  >
+    <p class="mb-3 px-3 text-[10px] font-bold uppercase tracking-[0.18em] text-[#7C56F6]">On this page</p>
+    <div class="space-y-1">
+      {items.map((item, index) => (
+        <a href={`#${item.id}`} data-section-link={item.id} aria-current={index === 0 ? "location" : undefined} class={linkClass}>
+          <span class="hidden h-1.5 w-1.5 shrink-0 rounded-full bg-[#7C56F6] group-aria-[current=location]:block group-aria-[current=location]:animate-[dot-in_.3s_cubic-bezier(.34,1.56,.64,1)]"></span>
+          <span>{item.label}</span>
+        </a>
+      ))}
+    </div>
+  </nav>
+</aside>
+
+<style is:global>
+  @keyframes dot-in {
+    from { transform: scale(0); }
+  }
+</style>
+
+<script>
+  const links = [...document.querySelectorAll<HTMLAnchorElement>("[data-section-link]")];
+  const ids = [...new Set(links.map((link) => link.dataset.sectionLink!))];
+  const sections = ids.map((id) => document.getElementById(id)).filter((section): section is HTMLElement => Boolean(section));
+  let activeId = "";
+
+  const setActive = (id: string) => {
+    if (id === activeId) return;
+    activeId = id;
+    for (const link of links) {
+      if (link.dataset.sectionLink === id) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    }
+  };
+
+  const updateActiveSection = () => {
+    const readingLine = Math.min(180, window.innerHeight * 0.24);
+    let current = sections[0];
+    for (const section of sections) {
+      if (section.getBoundingClientRect().top <= readingLine) current = section;
+    }
+    if (current) setActive(current.id);
+  };
+
+  if (sections.length) {
+    updateActiveSection();
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    window.addEventListener("resize", updateActiveSection);
+    for (const link of links) link.addEventListener("click", () => setActive(link.dataset.sectionLink!));
+  }
+</script>

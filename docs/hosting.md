@@ -1,6 +1,6 @@
 # Portfolio hosting
 
-The portfolio exports static files to `out/` by default. The deployment workflow uses the isolated `.next-pages/` export directory and deploys from `main` through `.github/workflows/deploy-pages.yml`.
+The portfolio is an Astro static site. `npm run build` writes it to `dist/`, and `.github/workflows/deploy-pages.yml` builds and deploys `dist/` from `main`.
 
 Custom domain: `design.isaiahadeleke.com`.
 
@@ -14,4 +14,4 @@ In GitHub repository Settings → Pages, use GitHub Actions as the source and se
 
 ## Future introduction video
 
-The homepage currently uses `public/photos/isaiah-hero.png` in `components/HeroSection.tsx`, labeled “Isaiah Adeleke.” When the introduction video is ready, replace the portrait card with a playable video. The earlier “Play my story” card is preserved in Git history (commit `5bc0192`).
+The homepage currently uses `public/photos/isaiah-hero.png` in `src/components/HeroSection.astro`, labeled “Isaiah Adeleke.” When the introduction video is ready, replace the portrait card with a playable video. The earlier “Play my story” card is preserved in Git history (commit `5bc0192`).

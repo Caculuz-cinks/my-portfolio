@@ -1,0 +1,108 @@
+---
+import type { ProjectVisual as ProjectVisualData } from "@/data/projects";
+
+interface Props {
+  visual: ProjectVisualData;
+  compact?: boolean;
+}
+
+const { visual, compact = false } = Astro.props;
+---
+
+{visual.type === "showcase" ? (
+  <figure class:list={["rounded-[1.6rem] border border-[#7C56F6]/15 bg-[#F7F4FE]", compact ? "p-4" : "p-5 md:p-7"]}>
+    <div class="mb-4 flex items-center justify-between gap-3">
+      <p class="text-xs font-bold uppercase tracking-[.14em] text-[#4930A8]">{visual.title}</p>
+      <span class="flex gap-1.5" aria-hidden="true"><i class="h-2 w-2 rounded-full bg-[#7C56F6]/35"></i><i class="h-2 w-2 rounded-full bg-[#7C56F6]/20"></i><i class="h-2 w-2 rounded-full bg-[#7C56F6]/10"></i></span>
+    </div>
+    <div class:list={["grid gap-3", visual.slots.length === 2 ? "sm:grid-cols-[1.4fr_.8fr]" : "sm:grid-cols-2"]}>
+      {visual.slots.map((slot) => (
+        <div class:list={["relative flex min-h-40 flex-col justify-between overflow-hidden rounded-2xl border border-dashed border-[#7C56F6]/30 bg-gradient-to-br from-white via-[#F9F7FF] to-[#EDE8FF] p-5", compact ? "min-h-36" : "md:min-h-52"]}>
+          <span class="absolute right-5 top-5 text-[#7C56F6]/35" aria-hidden="true">
+            <svg width="23" height="23" viewBox="0 0 24 24" fill="none"><rect x="2.5" y="3.5" width="19" height="17" rx="3" stroke="currentColor" /><circle cx="8" cy="9" r="1.5" fill="currentColor" /><path d="m4 17 5-5 3.5 3 3-3 5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </span>
+          <span class="text-[10px] font-bold uppercase tracking-[.16em] text-[#7C56F6]">Image space</span>
+          <div>
+            <p class="text-base font-semibold text-[#2D2350] md:text-lg">{slot.label}</p>
+            <p class="mt-1 text-xs text-ink/50">{slot.detail}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+    {visual.caption && !compact && <figcaption class="mt-4 text-xs leading-relaxed text-ink/50">{visual.caption}</figcaption>}
+  </figure>
+) : visual.type === "comparison" ? (
+  <div class="grid gap-4 md:grid-cols-2" aria-label="What we assumed versus what we learned">
+    {visual.columns.map((column, index) => (
+      <div class:list={["rounded-[1.4rem] border p-6 md:p-7", index === 0 ? "border-ink/10 bg-[#F6F4F0]" : "border-[#7C56F6]/25 bg-[#F0EBFF]"]}>
+        <p class:list={["text-xs font-bold uppercase tracking-[.16em]", index === 0 ? "text-ink/45" : "text-[#7C56F6]"]}>{column.heading}</p>
+        <h3 class="mt-8 text-xl font-bold leading-snug text-[#2D2350] md:text-2xl">{column.title}</h3>
+        <p class="mt-4 text-sm leading-relaxed text-ink/65">{column.description}</p>
+      </div>
+    ))}
+  </div>
+) : visual.type === "flow" ? (
+  <div class="space-y-9 border-y border-ink/10 py-7" aria-label="Business model before and after the pivot">
+    {visual.columns.map((column, columnIndex) => (
+      <div>
+        <p class:list={["mb-4 text-xs font-semibold", columnIndex === 0 ? "text-ink/60" : "text-[#4930A8]"]}>{column.heading}</p>
+        <ol class="grid grid-cols-3 gap-6 md:gap-10">
+          {column.steps.map((step, index) => (
+            <li class="relative min-w-0">
+              <div class:list={["flex min-h-[76px] items-center justify-center rounded-md border bg-white px-2 py-3 text-center text-xs font-semibold leading-snug md:text-sm", columnIndex === 0 ? "border-ink/25 text-ink/85" : "border-[#7C56F6]/50 text-[#4930A8]"]}>{step.title}</div>
+              {index < column.steps.length - 1 && <span class="absolute -right-6 top-[38px] w-6 -translate-y-1/2 text-ink/50 md:-right-10 md:w-10" aria-hidden="true"><svg viewBox="0 0 40 12" fill="none" class="h-3 w-full" preserveAspectRatio="none"><path d="M0 6H38M33 1L38 6L33 11" stroke="currentColor" stroke-width="1.25" vector-effect="non-scaling-stroke" /></svg></span>}
+              <p class="mt-2 text-[10px] leading-relaxed text-ink/60 md:text-xs">{step.description}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    ))}
+  </div>
+) : visual.type === "beforeAfter" ? (
+  <div class="rounded-[1.4rem] border border-[#7C56F6]/15 bg-[#F7F4FE] p-5 md:p-7">
+    <p class="mb-5 text-xs font-bold uppercase tracking-[.15em] text-[#4930A8]">Financing across the shopping journey</p>
+    <div class="grid gap-4 md:grid-cols-2">
+      {visual.columns.map((column, columnIndex) => (
+        <div class="rounded-xl border border-white bg-white/85 p-5">
+          <p class:list={["text-xs font-bold uppercase tracking-[.14em]", columnIndex ? "text-[#7C56F6]" : "text-ink/45"]}>{column.heading}</p>
+          <ol class="mt-5 space-y-4">
+            {column.items.map((item, index) => <li class="flex gap-3 text-sm leading-relaxed text-ink/70"><span class="font-bold text-[#7C56F6]">0{index + 1}</span><span>{item}</span></li>)}
+          </ol>
+          <div class="mt-6 border-t border-dashed border-[#7C56F6]/25 pt-4 text-xs font-medium text-ink/45">Image space · {column.heading.toLowerCase()} UI screens</div>
+        </div>
+      ))}
+    </div>
+  </div>
+) : visual.type === "groupedBars" ? (
+  <figure class="rounded-[1.4rem] border border-[#7C56F6]/15 bg-[#F7F4FE] p-5 md:p-8">
+    <figcaption class="text-xs font-bold uppercase tracking-[.15em] text-[#4930A8]">Share of checkouts by payment method</figcaption>
+    <div class="mt-10 grid grid-cols-[36px_minmax(0,1fr)] gap-3 sm:grid-cols-[44px_minmax(0,1fr)] sm:gap-4" aria-hidden="true">
+      <div class="relative h-64 text-[11px] text-ink/45 md:h-80">
+        {[100, 75, 50, 25, 0].map((tick) => <span class="absolute right-0 translate-y-1/2" style={`bottom:${tick}%`}>{tick}%</span>)}
+      </div>
+      <div class="relative h-64 border-b border-[#B9AFD2] md:h-80">
+        {[100, 75, 50, 25].map((tick) => <span class="absolute inset-x-0 border-t border-dashed border-[#D9D2E8]" style={`bottom:${tick}%`}></span>)}
+        <div class="relative z-10 grid h-full grid-cols-2 gap-5 px-2 sm:gap-12 sm:px-6">
+          {visual.rows.map((row) => <div class="flex h-full items-end justify-center gap-2 sm:gap-3">
+            <div class="relative w-full max-w-28 rounded-t-xl bg-gradient-to-t from-[#5636C9] to-[#7C56F6] shadow-[0_8px_18px_rgba(124,86,246,.16)]" style={`height:${row.financing}%`}><span class="absolute -top-7 left-1/2 -translate-x-1/2 text-xs font-bold text-[#4930A8]">{row.financing}%</span></div>
+            <div class="relative w-full max-w-28 rounded-t-xl bg-[#B8ADD1]" style={`height:${row.cash}%`}><span class="absolute -top-7 left-1/2 -translate-x-1/2 text-xs font-bold text-[#514866]">{row.cash}%</span></div>
+          </div>)}
+        </div>
+      </div>
+    </div>
+    <div class="mt-3 ml-[48px] grid grid-cols-2 gap-5 text-center text-xs font-semibold text-[#2D2350] sm:ml-[60px] sm:text-sm">
+      {visual.rows.map((row) => <span>{row.label}</span>)}
+    </div>
+    <div class="mt-6 flex flex-wrap justify-center gap-x-7 gap-y-2 text-xs font-medium text-ink/65 sm:text-sm"><span class="flex items-center gap-2"><i class="h-3 w-3 rounded-full bg-[#7C56F6]"></i>Financing checkout</span><span class="flex items-center gap-2"><i class="h-3 w-3 rounded-full bg-[#B8ADD1]"></i>Cash checkout</span></div>
+    <table class="sr-only"><caption>Share of checkouts by payment method</caption><thead><tr><th>Period</th><th>Financing checkout</th><th>Cash checkout</th></tr></thead><tbody>{visual.rows.map((row) => <tr><th>{row.label}</th><td>{row.financing}%</td><td>{row.cash}%</td></tr>)}</tbody></table>
+    <p class="mt-6 border-t border-[#7C56F6]/10 pt-5 text-xs leading-relaxed text-ink/55">{visual.note}</p>
+  </figure>
+) : (
+  <div class="grid gap-4 sm:grid-cols-3">
+    {visual.metrics.map((metric) => <div class="rounded-[1.4rem] border border-[#7C56F6]/15 bg-gradient-to-br from-white to-[#F1ECFF] p-6">
+      <p class="display-heading text-3xl text-[#7C56F6] md:text-4xl">{metric.value}</p>
+      <p class="mt-4 text-sm font-semibold leading-snug text-[#2D2350]">{metric.label}</p>
+      <p class="mt-2 text-xs leading-relaxed text-ink/55">{metric.detail}</p>
+    </div>)}
+  </div>
+)}

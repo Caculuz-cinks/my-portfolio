@@ -1,0 +1,52 @@
+---
+const email = "isaiahadeleke01@gmail.com";
+---
+
+<footer class="pb-7 md:pb-10">
+  <div class="max-w-content mx-auto px-7 md:px-14 lg:px-20">
+    <div class="reveal reveal-slide page-card p-7 md:p-12 lg:p-14" style="--reveal-y:32px">
+      <div class="grid grid-cols-1 lg:grid-cols-[1.35fr_.65fr] gap-12 lg:gap-20">
+        <div>
+          <h2 class="display-heading text-4xl md:text-6xl text-[#2D2350] max-w-4xl">Let&apos;s work on something useful together.</h2>
+          <p class="mt-6 text-base md:text-lg text-muted">{email}</p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href={`mailto:${email}`} class="rounded-xl bg-[#241D35] text-white text-xs font-bold px-5 py-3">Send email ↗</a>
+            <button type="button" data-copy-email={email} class="rounded-xl border border-ink/15 bg-white text-ink text-xs font-bold px-5 py-3">Copy email</button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-8 pt-2">
+          <div>
+            <h3 class="font-bold text-[#2D2350]">Navigation</h3>
+            <div class="mt-5 flex flex-col gap-3 text-sm text-muted">
+              <a href="/projects">Recent work</a><a href="/about">About me</a><a href="/content">Thoughts</a><a href="/shots">UI shots</a>
+            </div>
+          </div>
+          <div>
+            <h3 class="font-bold text-[#2D2350]">Elsewhere</h3>
+            <div class="mt-5 flex flex-col gap-3 text-sm text-muted">
+              <a href="https://www.linkedin.com/in/isaiahadeleke/">LinkedIn</a><a href="https://x.com/caculuz">X</a><a href="https://medium.com/@caculuz">Medium</a><a href="https://www.tiktok.com/@ai.caculuz">TikTok</a><a href="https://www.instagram.com/ai.caculuz/">Instagram</a><a href="https://cal.com/isaiah-adeleke/30min">Schedule a call</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-6 px-2 flex flex-col sm:flex-row justify-between gap-2 text-[10px] uppercase tracking-[0.14em] text-muted/65">
+      <p>Design & code © 2026 Isaiah Adeleke</p><p>Built in Lagos, shared globally</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>("[data-copy-email]");
+  let resetTimer = 0;
+
+  button?.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(button.dataset.copyEmail ?? "");
+      button.textContent = "Copied!";
+      clearTimeout(resetTimer);
+      resetTimer = window.setTimeout(() => (button.textContent = "Copy email"), 2000);
+    } catch {}
+  });
+</script>

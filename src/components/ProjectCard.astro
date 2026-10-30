@@ -1,0 +1,79 @@
+---
+import type { Project } from "@/data/projects";
+import BrowserMockup from "./BrowserMockup.astro";
+import ProjectVisual from "./ProjectVisual.astro";
+
+interface Props {
+  project: Project;
+  index?: number;
+  featured?: boolean;
+}
+
+const { project, index = 0, featured = false } = Astro.props;
+const cardImage = project.previewImage ?? project.heroImage;
+---
+
+<article
+  class="reveal reveal-slide grid grid-cols-1 md:grid-cols-[140px_1fr] gap-5 md:gap-9"
+  style={`--reveal-y:70px;--reveal-duration:.75s;--reveal-delay:${index * 0.05}s`}
+>
+  <div class="md:pt-8">
+    <div class="md:sticky md:top-32 flex items-center md:block gap-3">
+      <span class="inline-block w-2.5 h-2.5 rounded-full bg-[#7C56F6] shadow-[0_0_0_7px_rgba(124,86,246,0.09)]"></span>
+      <p class="display-heading text-3xl md:text-4xl text-[#4930A8]/15 md:mt-5">{project.year}</p>
+    </div>
+  </div>
+
+  <a href={`/projects/${project.slug}`} data-cursor-hover class="group page-card overflow-hidden block">
+    <div class:list={["p-6 md:p-9", !featured && "grid grid-cols-1 lg:grid-cols-[1.05fr_.95fr] gap-8 lg:gap-10 items-start"]}>
+      <div class:list={[featured && "max-w-3xl"]}>
+        <div class="flex flex-wrap items-center gap-2">
+          {project.tags.map((tag) => (
+            <span class="rounded-full bg-[#7C56F6]/8 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-[#7C56F6]">{tag}</span>
+          ))}
+        </div>
+        <h3 class="mt-6 display-heading text-3xl md:text-4xl lg:text-[2.75rem] text-[#2D2350] group-hover:text-[#7C56F6] transition-colors">
+          {project.title}
+        </h3>
+        <p class="mt-6 max-w-xl text-sm md:text-base leading-relaxed text-ink/65">{project.description}</p>
+        <dl class="mt-7 flex flex-wrap gap-x-7 gap-y-3">
+          {project.stats.map((stat) => (
+            <div class="flex max-w-sm items-baseline gap-2">
+              <dt class="order-2 text-sm font-medium leading-relaxed text-ink/70">{stat.label}</dt>
+              <dd class="order-1 flex shrink-0 items-baseline gap-1.5 whitespace-nowrap text-base font-bold tracking-[-0.03em] text-[#4930A8] md:text-lg"><span aria-hidden="true" class="text-lg font-medium">{stat.direction === "down" ? "↘" : "↗"}</span>{stat.value}</dd>
+            </div>
+          ))}
+        </dl>
+        <span class="mt-9 inline-flex items-center gap-2 rounded-xl bg-[#241D35] px-5 py-3 text-xs font-bold text-white shadow-md transition-transform group-hover:translate-x-1">
+          Read case study <span aria-hidden="true">→</span>
+        </span>
+      </div>
+
+      <div class:list={[featured && "mt-9", index % 2 === 0 ? "rotate-[.7deg]" : "rotate-[-.7deg]", "transition-transform duration-500 hover:rotate-0 hover:scale-[1.015]"]}>
+        {project.previewVideo ? (
+          <div class:list={[featured ? "aspect-[16/9]" : "aspect-[4/3]", "overflow-hidden rounded-[1.4rem] border border-ink/10 bg-[#EAE5DC] shadow-lg"]}>
+            <video
+              src={project.previewVideo.src}
+              poster={project.previewVideo.poster}
+              aria-label={project.previewVideo.label}
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.035]"
+            ></video>
+          </div>
+        ) : cardImage ? (
+          <div class:list={[featured ? "aspect-[16/9]" : "aspect-[4/3]", "rounded-[1.4rem] overflow-hidden bg-[#EAE5DC] border border-ink/10 shadow-lg"]}>
+            <img src={cardImage.src} alt={cardImage.alt} loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-[1.035] transition-transform duration-700" />
+          </div>
+        ) : project.heroVisual ? (
+          <ProjectVisual visual={project.heroVisual} compact />
+        ) : (
+          <BrowserMockup slug={project.slug} title={project.title} />
+        )}
+      </div>
+    </div>
+  </a>
+</article>

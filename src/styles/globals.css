@@ -1,0 +1,218 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face { font-family: "Roobert"; src: url("/fonts/Roobert-Regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Roobert"; src: url("/fonts/Roobert-Medium.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Roobert"; src: url("/fonts/Roobert-SemiBold.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Roobert"; src: url("/fonts/Roobert-Bold.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Recoleta"; src: url("/fonts/Recoleta/Recoleta-Regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Recoleta"; src: url("/fonts/Recoleta/Recoleta-SemiBold.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Recoleta"; src: url("/fonts/Recoleta/Recoleta-Bold.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+
+:root {
+  --background: #F3EFE7;
+  --foreground: #242725;
+  --brand: #7C56F6;
+  --brand-dark: #4930A8;
+  --surface: #FCFAF6;
+  --font-sans: "Roobert";
+  --font-display: "Recoleta";
+}
+
+/* Only hide the system cursor once the custom cursor script is running. */
+html.has-custom-cursor * {
+  cursor: none;
+}
+
+dialog,
+dialog *,
+dialog::backdrop {
+  cursor: auto;
+}
+
+dialog button,
+dialog a {
+  cursor: pointer;
+}
+
+html:has(dialog[open]) .custom-cursor {
+  visibility: hidden;
+}
+
+@media (max-width: 768px), (hover: none) and (pointer: coarse) {
+  html.has-custom-cursor * {
+    cursor: auto;
+  }
+}
+
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  border-radius: 9999px;
+  background: #3E3D3E;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  opacity: 0;
+  transition: width 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), height 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), margin 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s;
+  will-change: transform;
+}
+
+.custom-cursor.is-visible { opacity: 1; }
+.custom-cursor.is-hovering { width: 48px; height: 48px; margin: -24px 0 0 -24px; }
+
+/* Cross-document page transitions, no client router needed. */
+@view-transition {
+  navigation: auto;
+}
+
+@keyframes page-in {
+  from { opacity: 0; transform: translateY(18px); filter: blur(6px); }
+}
+
+.page-main {
+  animation: page-in 0.48s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+/* Scroll reveals: hidden only when JS is available, so content never stays invisible. */
+.js .reveal {
+  opacity: 0;
+  transform: translate3d(var(--reveal-x, 0), var(--reveal-y, 34px), 0) scale(var(--reveal-scale, 0.985));
+  filter: blur(var(--reveal-blur, 6px));
+  transition:
+    opacity var(--reveal-duration, 0.72s) cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s),
+    transform var(--reveal-duration, 0.72s) cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s),
+    filter var(--reveal-duration, 0.72s) cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s);
+}
+
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+.reveal-slide { --reveal-blur: 0px; --reveal-scale: 1; }
+
+@keyframes hero-in {
+  from { opacity: 0; transform: translateY(var(--hero-y, 20px)) rotate(var(--hero-rotate, 0deg)); }
+}
+
+.hero-in {
+  animation: hero-in var(--hero-duration, 0.65s) cubic-bezier(0.22, 1, 0.36, 1) var(--hero-delay, 0s) backwards;
+}
+
+.hero-card {
+  transform: rotate(var(--card-rotate));
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.hero-card:hover {
+  z-index: 30 !important;
+  transform: translate(var(--hover-x), var(--hover-y)) rotate(var(--hover-rotate)) scale(var(--hover-scale, 1.07));
+}
+
+.hero-card:active { --hover-scale: 0.98; }
+
+.lift-on-hover {
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.lift-on-hover:hover {
+  transform: translateY(-7px) rotate(var(--lift-rotate, 0deg));
+}
+
+.stack-card {
+  transition: transform 0.6s cubic-bezier(0.34, 1.3, 0.64, 1), opacity 0.6s ease;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 15px;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  overflow-x: hidden;
+  background-image:
+    radial-gradient(circle at 10% 0%, rgba(255, 255, 255, 0.86), transparent 32rem),
+    radial-gradient(circle at 100% 20%, rgba(124, 86, 246, 0.06), transparent 28rem);
+}
+
+::selection {
+  background: #3E3D3E;
+  color: #FDFCFB;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.display-heading {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 0.98;
+}
+
+.gradient-ink {
+  background: linear-gradient(105deg, #4930A8 0%, #7C56F6 48%, #B6A5FF 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.page-card {
+  background: rgba(252, 250, 246, 0.92);
+  border: 1px solid rgba(36, 39, 37, 0.08);
+  border-radius: 2rem;
+  box-shadow: 0 24px 80px rgba(36, 39, 37, 0.06);
+}
+
+.fine-grid {
+  background-image:
+    linear-gradient(rgba(124, 86, 246, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124, 86, 246, 0.055) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+@keyframes card-float {
+  0%, 100% { transform: translateY(0) rotate(var(--card-rotation, 0deg)); }
+  50% { transform: translateY(-10px) rotate(var(--card-rotation, 0deg)); }
+}
+
+.card-float {
+  animation: card-float 6s ease-in-out infinite;
+}
+
+.card-float:nth-child(2) { animation-delay: -1.5s; }
+.card-float:nth-child(3) { animation-delay: -3s; }
+.card-float:nth-child(4) { animation-delay: -4.5s; }
+
+@keyframes ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-ticker-scroll {
+  animation: ticker-scroll 30s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal { opacity: 1; transform: none; filter: none; }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
