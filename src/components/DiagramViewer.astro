@@ -1,0 +1,73 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  title: string;
+  square?: boolean;
+}
+
+const { src, alt, title, square = false } = Astro.props;
+---
+
+<figure data-diagram>
+  <button type="button" data-open aria-label={`View ${title} in full`} class:list={["group/diagram relative block h-56 w-full overflow-hidden border bg-[#F0EDE8] text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7C56F6] md:h-72", square ? "rounded-none border-ink/5" : "rounded-[1.4rem] border-ink/10"]}>
+    <img src={src} alt={alt} loading="lazy" decoding="async" class="h-full w-full object-cover object-top" />
+    <span class="absolute inset-0 bg-gradient-to-t from-[#241D35]/60 via-transparent to-transparent"></span>
+    <span class="absolute inset-0 flex items-center justify-center bg-[#241D35]/15 opacity-100 transition-opacity sm:opacity-0 sm:group-hover/diagram:opacity-100 sm:group-focus-visible/diagram:opacity-100"><span class="rounded-full bg-white px-5 py-3 text-sm font-bold text-[#4930A8] shadow-xl">View in full ↗</span></span>
+    <span class="absolute bottom-4 left-5 text-sm font-semibold text-white">{title}</span>
+  </button>
+
+  <dialog aria-label={title} class="fixed inset-0 m-auto h-[94dvh] max-h-none w-[96vw] max-w-none flex-col overflow-hidden rounded-2xl border border-white/20 bg-[#FCFAF6] p-3 shadow-2xl backdrop:bg-[#241D35]/80 open:flex md:p-5">
+    <div class="mb-3 flex shrink-0 flex-wrap items-center justify-between gap-3">
+      <h2 class="font-semibold text-[#2D2350]">{title}</h2>
+      <div class="flex items-center gap-2">
+        <button type="button" data-zoom="-0.5" aria-label="Zoom out" disabled class="h-9 w-9 rounded-lg border border-ink/15 bg-white font-bold disabled:opacity-30">−</button>
+        <span data-zoom-label class="w-12 text-center text-xs tabular-nums text-ink/70">100%</span>
+        <button type="button" data-zoom="0.5" aria-label="Zoom in" class="h-9 w-9 rounded-lg border border-ink/15 bg-white font-bold disabled:opacity-30">+</button>
+        <button type="button" data-fit class="h-9 rounded-lg border border-ink/15 bg-white px-3 text-xs font-semibold">Fit</button>
+        <button type="button" data-close autofocus class="h-9 rounded-lg bg-[#4930A8] px-3 text-xs font-bold text-white">Close ×</button>
+      </div>
+    </div>
+    <div data-canvas class="min-h-0 flex-1 overflow-auto rounded-xl border border-ink/10 bg-white">
+      <div data-zoom-area style="width:100%;height:100%">
+        <img src={src} alt={alt} loading="lazy" class="h-full w-full object-contain" />
+      </div>
+    </div>
+  </dialog>
+</figure>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>("[data-diagram]")) {
+    const dialog = root.querySelector("dialog")!;
+    const canvas = root.querySelector<HTMLElement>("[data-canvas]")!;
+    const area = root.querySelector<HTMLElement>("[data-zoom-area]")!;
+    const label = root.querySelector<HTMLElement>("[data-zoom-label]")!;
+    const zoomOut = root.querySelector<HTMLButtonElement>('[data-zoom="-0.5"]')!;
+    const zoomIn = root.querySelector<HTMLButtonElement>('[data-zoom="0.5"]')!;
+    let zoom = 1;
+
+    const setZoom = (value: number) => {
+      zoom = Math.min(4, Math.max(1, value));
+      area.style.width = area.style.height = `${zoom * 100}%`;
+      label.textContent = `${Math.round(zoom * 100)}%`;
+      zoomOut.disabled = zoom === 1;
+      zoomIn.disabled = zoom === 4;
+    };
+    const fit = () => {
+      setZoom(1);
+      canvas.scrollTo(0, 0);
+    };
+
+    root.querySelector("[data-open]")!.addEventListener("click", () => {
+      fit();
+      dialog.showModal();
+    });
+    zoomOut.addEventListener("click", () => setZoom(zoom - 0.5));
+    zoomIn.addEventListener("click", () => setZoom(zoom + 0.5));
+    root.querySelector("[data-fit]")!.addEventListener("click", fit);
+    root.querySelector("[data-close]")!.addEventListener("click", () => dialog.close());
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+  }
+</script>

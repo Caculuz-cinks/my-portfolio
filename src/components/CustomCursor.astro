@@ -1,0 +1,37 @@
+<div class="custom-cursor" aria-hidden="true"></div>
+
+<script>
+  const cursor = document.querySelector<HTMLElement>(".custom-cursor");
+  const touch = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+
+  if (cursor && !touch) {
+    document.documentElement.classList.add("has-custom-cursor");
+    let targetX = -100;
+    let targetY = -100;
+    let x = targetX;
+    let y = targetY;
+    let frame = 0;
+
+    // Critically damped follow, close to the old spring without a motion library.
+    const follow = () => {
+      x += (targetX - x) * 0.35;
+      y += (targetY - y) * 0.35;
+      cursor.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      frame = Math.abs(targetX - x) > 0.1 || Math.abs(targetY - y) > 0.1 ? requestAnimationFrame(follow) : 0;
+    };
+
+    window.addEventListener("mousemove", (event) => {
+      targetX = event.clientX;
+      targetY = event.clientY;
+      cursor.classList.add("is-visible");
+      if (!frame) frame = requestAnimationFrame(follow);
+    });
+
+    window.addEventListener("mouseover", (event) => {
+      const target = event.target as HTMLElement;
+      cursor.classList.toggle("is-hovering", Boolean(target.closest?.("a, button, [data-cursor-hover]")));
+    });
+  } else {
+    cursor?.remove();
+  }
+</script>

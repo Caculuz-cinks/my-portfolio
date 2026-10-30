@@ -2,10 +2,7 @@ import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./data/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.{astro,html,js,ts}",
   ],
   theme: {
     extend: {
@@ -17,7 +14,6 @@ const config: Config = {
         paper: "#FFFFFF",
       },
       fontFamily: {
-        serif: ["var(--font-serif)", "serif"],
         sans: ["var(--font-sans)", "sans-serif"],
       },
       maxWidth: {

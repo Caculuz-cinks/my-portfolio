@@ -1,0 +1,130 @@
+---
+import type { Project } from "@/data/projects";
+import BrowserMockup from "./BrowserMockup.astro";
+import ProjectVisual from "./ProjectVisual.astro";
+
+const { projects } = Astro.props as { projects: Project[] };
+
+// Shared with the shuffle script below so the first paint matches the animated state.
+const cardStyle = (index: number, total: number) =>
+  `transform:translateY(${28 + index * -14}px) scale(${1 - index * 0.025}) rotate(${index % 2 === 0 ? 0 : index * 0.35}deg);opacity:${1 - index * 0.08};z-index:${total - index}`;
+---
+
+{projects.length > 0 && (
+  <section data-case-stack class="mt-24 md:mt-32">
+    <div class="page-card overflow-hidden px-5 py-10 md:px-10 md:py-14">
+      <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h2 class="display-heading text-4xl text-[#2D2350] md:text-6xl">More case studies</h2>
+          <p class="mt-3 max-w-xl text-sm leading-relaxed text-ink/55 md:text-base">
+            Shuffle through more product work and the decisions behind it.
+          </p>
+        </div>
+        <span class="text-xs font-semibold uppercase tracking-[0.14em] text-[#7C56F6]">{projects.length} more to explore</span>
+      </div>
+
+      <div class="relative mt-8 h-[500px] sm:h-[420px] md:h-[390px]">
+        {projects.map((project, index) => {
+          const front = index === 0;
+          return (
+            <article
+              data-stack-card
+              style={cardStyle(index, projects.length)}
+              class:list={["stack-card absolute inset-x-0 top-0 overflow-hidden rounded-[1.6rem] border bg-[#FCFAF6] shadow-[0_24px_60px_rgba(45,35,80,.12)]", front ? "border-[#7C56F6]/20" : "border-ink/10"]}
+            >
+              <div class="grid min-h-[340px] grid-cols-1 gap-0 sm:grid-cols-[.82fr_1.18fr]">
+                <div class="min-h-44 overflow-hidden bg-[#F0EDE8] p-4 sm:min-h-full">
+                  {project.previewVideo ? (
+                    <video
+                      src={project.previewVideo.src}
+                      poster={project.previewVideo.poster}
+                      aria-label={project.previewVideo.label}
+                      autoplay
+                      muted
+                      loop
+                      playsinline
+                      preload="metadata"
+                      class="h-full w-full rounded-[1.1rem] object-cover"
+                    ></video>
+                  ) : project.heroImage ? (
+                    <img src={project.heroImage.src} alt={project.heroImage.alt} loading="lazy" decoding="async" class="h-full w-full rounded-[1.1rem] object-cover" />
+                  ) : project.heroVisual ? (
+                    <ProjectVisual visual={project.heroVisual} compact />
+                  ) : (
+                    <div class="flex h-full items-center">
+                      <BrowserMockup slug={project.slug} title={project.title} />
+                    </div>
+                  )}
+                </div>
+
+                <div class="flex flex-col justify-center p-6 md:p-9">
+                  <div class="flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <span class="rounded-full bg-[#7C56F6]/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-[#4930A8]">{tag}</span>
+                    ))}
+                  </div>
+                  <h3 class="mt-4 line-clamp-4 display-heading text-2xl leading-tight text-[#2D2350] md:text-4xl">{project.title}</h3>
+                  <p class="mt-4 line-clamp-3 text-sm leading-relaxed text-ink/55 md:text-base">{project.description}</p>
+                  <a
+                    href={`/projects/${project.slug}`}
+                    data-cursor-hover
+                    tabindex={front ? undefined : -1}
+                    aria-hidden={front ? undefined : "true"}
+                    class:list={["mt-6 inline-flex w-fit items-center gap-2 rounded-xl bg-[#2D2350] px-5 py-3 text-xs font-bold text-white transition hover:-translate-y-0.5 hover:bg-[#7C56F6]", front ? "pointer-events-auto" : "pointer-events-none"]}
+                  >
+                    Read case study <span aria-hidden="true">→</span>
+                  </a>
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+
+      {projects.length > 1 && (
+        <div class="mt-5 flex justify-center">
+          <button
+            type="button"
+            data-shuffle
+            data-cursor-hover
+            class="inline-flex items-center gap-2 rounded-full bg-[#7C56F6] px-6 py-3 text-sm font-bold text-white shadow-[0_12px_30px_rgba(124,86,246,.28)] transition-transform duration-200 hover:-translate-y-[3px] hover:scale-[1.03] active:scale-[0.96]"
+          >
+            <span aria-hidden="true">↻</span> Shuffle
+          </button>
+        </div>
+      )}
+    </div>
+  </section>
+)}
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>("[data-case-stack]")) {
+    let cards = [...root.querySelectorAll<HTMLElement>("[data-stack-card]")];
+
+    const layout = () => {
+      cards.forEach((card, index) => {
+        const front = index === 0;
+        card.style.transform = `translateY(${28 + index * -14}px) scale(${1 - index * 0.025}) rotate(${index % 2 === 0 ? 0 : index * 0.35}deg)`;
+        card.style.opacity = String(1 - index * 0.08);
+        card.style.zIndex = String(cards.length - index);
+        card.classList.toggle("border-[#7C56F6]/20", front);
+        card.classList.toggle("border-ink/10", !front);
+        const link = card.querySelector<HTMLAnchorElement>("a")!;
+        link.classList.toggle("pointer-events-auto", front);
+        link.classList.toggle("pointer-events-none", !front);
+        if (front) {
+          link.removeAttribute("tabindex");
+          link.removeAttribute("aria-hidden");
+        } else {
+          link.tabIndex = -1;
+          link.setAttribute("aria-hidden", "true");
+        }
+      });
+    };
+
+    root.querySelector("[data-shuffle]")?.addEventListener("click", () => {
+      cards = [...cards.slice(1), cards[0]];
+      layout();
+    });
+  }
+</script>

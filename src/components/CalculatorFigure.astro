@@ -1,0 +1,10 @@
+---
+const { src, label, alt } = Astro.props as { src: string; label: string; alt: string };
+---
+
+<figure class="my-10 overflow-hidden rounded-[1.5rem] border border-ink/10 bg-white shadow-[0_18px_55px_rgba(36,39,37,0.08)]">
+  <img src={src} alt={alt} loading="lazy" decoding="async" class="block h-auto w-full" />
+  <figcaption class="border-t border-ink/10 px-5 py-3 text-sm font-semibold text-[#2D2350] md:px-7">
+    {label}
+  </figcaption>
+</figure>

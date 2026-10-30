@@ -1,0 +1,69 @@
+---
+import "@/styles/globals.css";
+import Navbar from "@/components/Navbar.astro";
+import Footer from "@/components/Footer.astro";
+import CustomCursor from "@/components/CustomCursor.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Isaiah Adeleke — Senior AI Product Designer",
+  description = "Isaiah Adeleke is a Senior AI Product Designer and Co-founder of Tride, designing intelligent systems where humans and AI collaborate. Based in Lagos, Nigeria.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="icon" href="/favicon.ico" sizes="16x16" />
+    <link rel="icon" href="/icon.png" type="image/png" sizes="512x512" />
+    <link rel="apple-touch-icon" href="/apple-icon.png" sizes="180x180" />
+    <link rel="preload" href="/fonts/Roobert-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Recoleta/Recoleta-SemiBold.woff2" as="font" type="font/woff2" crossorigin />
+    <script is:inline>document.documentElement.classList.add("js");</script>
+  </head>
+  <body class="font-sans bg-cream text-ink antialiased">
+    <CustomCursor />
+    <Navbar />
+    <main class="page-main min-h-screen">
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      // Reveal anything that has reached 90% of the viewport, including sections a
+      // fast scroll or anchor jump skipped past, so nothing is left invisible.
+      let pending = [...document.querySelectorAll<HTMLElement>(".reveal")];
+      let ticking = false;
+
+      const check = () => {
+        ticking = false;
+        const line = window.innerHeight * 0.9;
+        pending = pending.filter((element) => {
+          if (element.getBoundingClientRect().top >= line) return true;
+          element.classList.add("is-visible");
+          return false;
+        });
+        if (!pending.length) {
+          window.removeEventListener("scroll", schedule);
+          window.removeEventListener("resize", schedule);
+        }
+      };
+      const schedule = () => {
+        if (!ticking) requestAnimationFrame(check);
+        ticking = true;
+      };
+
+      window.addEventListener("scroll", schedule, { passive: true });
+      window.addEventListener("resize", schedule);
+      check();
+    </script>
+  </body>
+</html>

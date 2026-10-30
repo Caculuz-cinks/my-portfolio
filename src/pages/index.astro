@@ -1,0 +1,54 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import HeroSection from "@/components/HeroSection.astro";
+import AboutPreview from "@/components/AboutPreview.astro";
+import MentorshipSection from "@/components/MentorshipSection.astro";
+import ProjectCard from "@/components/ProjectCard.astro";
+import OtherWorksSection from "@/components/OtherWorksSection.astro";
+import TestimonialCollage from "@/components/TestimonialCollage.astro";
+import Reveal from "@/components/Reveal.astro";
+import Ticker from "@/components/Ticker.astro";
+import { projects } from "@/data/projects";
+---
+
+<BaseLayout>
+  <HeroSection />
+
+  <section class="border-y border-ink/8 bg-white/35 py-8 md:py-10">
+    <Ticker />
+  </section>
+
+  <AboutPreview />
+
+  <section class="py-20 md:py-32" id="work">
+    <div class="max-w-content mx-auto px-7 md:px-14 lg:px-20">
+      <Reveal>
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-7 mb-16 md:mb-24">
+          <div>
+            <h2 class="display-heading text-4xl md:text-6xl text-[#2D2350]">Some recent work.</h2>
+            <p class="mt-6 max-w-2xl text-base md:text-lg text-ink/65">A quick look at products I&apos;ve shaped from AI to Health tech, Ecommerce, Fintech and others.</p>
+          </div>
+          <a href="/projects" class="rounded-xl border border-ink/15 bg-white/60 px-5 py-3 text-xs font-bold text-[#2D2350] hover:bg-[#4930A8] hover:text-white transition-colors w-fit">View all work →</a>
+        </div>
+      </Reveal>
+
+      <div class="space-y-16 md:space-y-24">
+        {projects.map((project, index) => <ProjectCard project={project} index={index} featured />)}
+      </div>
+    </div>
+  </section>
+
+  <OtherWorksSection />
+
+  <MentorshipSection />
+
+  <section class="py-20 md:py-32 overflow-hidden">
+    <div class="max-w-content mx-auto px-7 md:px-14 lg:px-20">
+      <Reveal>
+        <h2 class="display-heading text-4xl md:text-6xl max-w-5xl text-[#2D2350]">What it&apos;s like working with me.</h2>
+      </Reveal>
+
+      <TestimonialCollage />
+    </div>
+  </section>
+</BaseLayout>

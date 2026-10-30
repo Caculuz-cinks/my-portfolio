@@ -1,0 +1,10 @@
+---
+const { text } = Astro.props as { text: string };
+const parts = text.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g);
+---
+
+{parts.map((part) => {
+  if (part.startsWith("**") && part.endsWith("**")) return <strong class="font-semibold text-[#2D2350]">{part.slice(2, -2)}</strong>;
+  if (part.startsWith("*") && part.endsWith("*")) return <em>{part.slice(1, -1)}</em>;
+  return part;
+})}
